@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */; };
+		FC6EB95F2BBB822E002327C2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */; };
+		FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB9602BBB82C3002327C2 /* TabBarController.swift */; };
+		FC6EB9632BBB8A49002327C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB9622BBB8A49002327C2 /* HomeViewController.swift */; };
 		FC840C302B92B72200EC7B38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C2F2B92B72200EC7B38 /* AppDelegate.swift */; };
 		FC840C322B92B72200EC7B38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C312B92B72200EC7B38 /* SceneDelegate.swift */; };
-		FC840C342B92B72200EC7B38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C332B92B72200EC7B38 /* ViewController.swift */; };
+		FC840C342B92B72200EC7B38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C332B92B72200EC7B38 /* LoginViewController.swift */; };
 		FC840C372B92B72200EC7B38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC840C352B92B72200EC7B38 /* Main.storyboard */; };
 		FC840C392B92B72300EC7B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC840C382B92B72300EC7B38 /* Assets.xcassets */; };
 		FC840C3C2B92B72300EC7B38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC840C3A2B92B72300EC7B38 /* LaunchScreen.storyboard */; };
@@ -36,10 +40,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FC6EB9602BBB82C3002327C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		FC6EB9622BBB8A49002327C2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FC840C2C2B92B72200EC7B38 /* EduRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC840C2F2B92B72200EC7B38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC840C312B92B72200EC7B38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FC840C332B92B72200EC7B38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC840C332B92B72200EC7B38 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FC840C362B92B72200EC7B38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC840C382B92B72300EC7B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC840C3B2B92B72300EC7B38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,9 +107,13 @@
 		FC840C2E2B92B72200EC7B38 /* EduRide */ = {
 			isa = PBXGroup;
 			children = (
+				FC6EB9622BBB8A49002327C2 /* HomeViewController.swift */,
+				FC840C332B92B72200EC7B38 /* LoginViewController.swift */,
+				FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */,
+				FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */,
+				FC6EB9602BBB82C3002327C2 /* TabBarController.swift */,
 				FC840C2F2B92B72200EC7B38 /* AppDelegate.swift */,
 				FC840C312B92B72200EC7B38 /* SceneDelegate.swift */,
-				FC840C332B92B72200EC7B38 /* ViewController.swift */,
 				FC840C352B92B72200EC7B38 /* Main.storyboard */,
 				FC840C382B92B72300EC7B38 /* Assets.xcassets */,
 				FC840C3A2B92B72300EC7B38 /* LaunchScreen.storyboard */,
@@ -258,8 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC840C342B92B72200EC7B38 /* ViewController.swift in Sources */,
+				FC840C342B92B72200EC7B38 /* LoginViewController.swift in Sources */,
 				FC840C302B92B72200EC7B38 /* AppDelegate.swift in Sources */,
+				FC6EB95F2BBB822E002327C2 /* ProfileViewController.swift in Sources */,
+				FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */,
+				FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */,
+				FC6EB9632BBB8A49002327C2 /* HomeViewController.swift in Sources */,
 				FC840C322B92B72200EC7B38 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

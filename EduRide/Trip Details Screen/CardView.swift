@@ -9,6 +9,7 @@ import UIKit
 
 class CardView: UIView {
             
+    var profileImageView: UIImageView!
     var mainDescriptionLabel: UILabel!
     var acceptButton: UIButton!
     var rejectButton: UIButton!
@@ -24,6 +25,16 @@ class CardView: UIView {
     }
     
     private func setupCard() {
+        
+        profileImageView = UIImageView()
+        profileImageView.image = UIImage(systemName: "person.fill")
+        profileImageView.tintColor = .black
+        profileImageView.contentMode = .scaleToFill
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = 10
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(profileImageView)
+        
         mainDescriptionLabel = UILabel()
         mainDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainDescriptionLabel)
@@ -39,17 +50,32 @@ class CardView: UIView {
         addSubview(rejectButton)
         
         NSLayoutConstraint.activate([
-            mainDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            mainDescriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            mainDescriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            profileImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            profileImageView.widthAnchor.constraint(equalToConstant: 70),
+            profileImageView.heightAnchor.constraint(equalToConstant: 70),
+
+            mainDescriptionLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8),
+            mainDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            mainDescriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            acceptButton.leadingAnchor.constraint(equalTo: mainDescriptionLabel.leadingAnchor),
             acceptButton.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 16),
-            acceptButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            acceptButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            acceptButton.widthAnchor.constraint(equalToConstant: 100),
+            acceptButton.heightAnchor.constraint(equalToConstant: 40),
+        
+            rejectButton.leadingAnchor.constraint(equalTo: acceptButton.trailingAnchor, constant: 30),
+            rejectButton.topAnchor.constraint(equalTo: acceptButton.topAnchor),
+            rejectButton.bottomAnchor.constraint(equalTo: acceptButton.bottomAnchor),
+            rejectButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            rejectButton.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 16),
-            rejectButton.leadingAnchor.constraint(equalTo: acceptButton.trailingAnchor, constant: 250),
-            rejectButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            widthAnchor.constraint(equalToConstant: 300)
+            
+//            rejectButton.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 16),
+//            rejectButton.leadingAnchor.constraint(equalTo: acceptButton.trailingAnchor, constant: 250),
+//            rejectButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
         
         layer.cornerRadius = 10

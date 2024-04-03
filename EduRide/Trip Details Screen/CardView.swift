@@ -72,10 +72,6 @@ class CardView: UIView {
             rejectButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             widthAnchor.constraint(equalToConstant: 300)
-            
-//            rejectButton.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 16),
-//            rejectButton.leadingAnchor.constraint(equalTo: acceptButton.trailingAnchor, constant: 250),
-//            rejectButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
         
         layer.cornerRadius = 10

@@ -39,13 +39,16 @@ class TripDetailsView: UIView {
     }
     
     func setupCoPassengerCardView() {
-        for value in self.databaseValues {
+        for (index, value) in self.databaseValues.enumerated() {
             let coPassCardView = CardView()
             coPassCardView.translatesAutoresizingMaskIntoConstraints = false
             addSubview(coPassCardView)
             
             coPassCardView.mainDescriptionLabel.text = value
             
+            coPassCardView.acceptButton.tag = index
+            coPassCardView.rejectButton.tag = index
+                    
             coPassCardViews.append(coPassCardView)
         }
         layoutCardViews()

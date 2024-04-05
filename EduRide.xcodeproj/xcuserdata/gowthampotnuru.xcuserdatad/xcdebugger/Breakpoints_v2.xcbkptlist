@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "BFA3C304-9D11-4DD9-BA26-802E70702D96"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01F4EDED-2F45-416D-B393-0B7C24FE9C77"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduRide/OfferTrip/View/OfferTripView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "initConstraints()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "01F4EDED-2F45-416D-B393-0B7C24FE9C77 - 3153ee59d54c131e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EduRide.OfferTripView.initConstraints() -&gt; ()"
+                  moduleName = "EduRide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gowthampotnuru/Documents/Masters/Coursework/CS5520/Project/EduRide/EduRide/OfferTrip/View/OfferTripView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "6800">
+               </Location>
+               <Location
+                  uuid = "01F4EDED-2F45-416D-B393-0B7C24FE9C77 - 3153ee59d54c131e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EduRide.OfferTripView.initConstraints() -&gt; ()"
+                  moduleName = "EduRide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gowthampotnuru/Documents/Masters/Coursework/CS5520/Project/EduRide/EduRide/OfferTrip/View/OfferTripView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "7932">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

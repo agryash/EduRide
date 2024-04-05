@@ -20,8 +20,8 @@ class TabBarController: UITabBarController {
     
     private func setupTabs(){
         
-        let home = self.createNav(with: "Home", and: UIImage (systemName: "house"), vc: HomeViewController())
-        let chat = self.createNav(with: "Chat", and: UIImage(systemName:"message"), vc: ChatViewController())
+        let home = self.createNav(with: "Offer Trip", and: UIImage (systemName: "house"), vc: OfferTripViewController())
+        let chat = self.createNav(with: "Find Trip", and: UIImage(systemName:"message"), vc: FindTripViewController())
         let profile = self.createNav(with: "Profile", and: UIImage (systemName:"person"), vc: ProfileViewController())
         
         self.setViewControllers([home, chat, profile], animated:true)

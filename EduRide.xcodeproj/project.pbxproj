@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		382F27252BBF473600DB7315 /* PendingRequestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F27242BBF473600DB7315 /* PendingRequestCardView.swift */; };
+		382F27272BBF47C400DB7315 /* SentRequestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F27262BBF47C400DB7315 /* SentRequestCardView.swift */; };
+		382F27292BBF491800DB7315 /* MyTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F27282BBF491800DB7315 /* MyTripsView.swift */; };
+		382F272B2BBF4BCD00DB7315 /* MyTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F272A2BBF4BCD00DB7315 /* MyTripsViewController.swift */; };
 		FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */; };
 		FC6EB95F2BBB822E002327C2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */; };
 		FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB9602BBB82C3002327C2 /* TabBarController.swift */; };
@@ -40,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		382F27242BBF473600DB7315 /* PendingRequestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestCardView.swift; sourceTree = "<group>"; };
+		382F27262BBF47C400DB7315 /* SentRequestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentRequestCardView.swift; sourceTree = "<group>"; };
+		382F27282BBF491800DB7315 /* MyTripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsView.swift; sourceTree = "<group>"; };
+		382F272A2BBF4BCD00DB7315 /* MyTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsViewController.swift; sourceTree = "<group>"; };
 		FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FC6EB9602BBB82C3002327C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -84,6 +92,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		382F272C2BBF4BD700DB7315 /* MyTripsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				382F27242BBF473600DB7315 /* PendingRequestCardView.swift */,
+				382F27262BBF47C400DB7315 /* SentRequestCardView.swift */,
+				382F27282BBF491800DB7315 /* MyTripsView.swift */,
+				382F272A2BBF4BCD00DB7315 /* MyTripsViewController.swift */,
+			);
+			path = MyTripsScreen;
+			sourceTree = "<group>";
+		};
 		FC840C232B92B72200EC7B38 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +137,7 @@
 				FC840C382B92B72300EC7B38 /* Assets.xcassets */,
 				FC840C3A2B92B72300EC7B38 /* LaunchScreen.storyboard */,
 				FC840C3D2B92B72300EC7B38 /* Info.plist */,
+				382F272C2BBF4BD700DB7315 /* MyTripsScreen */,
 			);
 			path = EduRide;
 			sourceTree = "<group>";
@@ -272,6 +292,10 @@
 			files = (
 				FC840C342B92B72200EC7B38 /* LoginViewController.swift in Sources */,
 				FC840C302B92B72200EC7B38 /* AppDelegate.swift in Sources */,
+				382F27252BBF473600DB7315 /* PendingRequestCardView.swift in Sources */,
+				382F27292BBF491800DB7315 /* MyTripsView.swift in Sources */,
+				382F272B2BBF4BCD00DB7315 /* MyTripsViewController.swift in Sources */,
+				382F27272BBF47C400DB7315 /* SentRequestCardView.swift in Sources */,
 				FC6EB95F2BBB822E002327C2 /* ProfileViewController.swift in Sources */,
 				FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */,
 				FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */,

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "06C725E4-8E87-49C6-87CA-0806B79C387E"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0BF7D243-DA02-435D-9360-311CCF97AD93"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduRide/Register Screen/RegisterView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "initConstraints()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0BF7D243-DA02-435D-9360-311CCF97AD93 - ade95fa091a2dee4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EduRide.RegisterView.initConstraints() -&gt; ()"
+                  moduleName = "EduRide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riya/Documents/Subjects/MobileDev/EduRide/EduRide/Register%20Screen/RegisterView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "7992">
+               </Location>
+               <Location
+                  uuid = "0BF7D243-DA02-435D-9360-311CCF97AD93 - ade95fa091a2dee4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EduRide.RegisterView.initConstraints() -&gt; ()"
+                  moduleName = "EduRide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riya/Documents/Subjects/MobileDev/EduRide/EduRide/Register%20Screen/RegisterView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "8844">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

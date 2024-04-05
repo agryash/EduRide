@@ -19,12 +19,12 @@ class LoginScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        title = "Login"
-
-        // Do any additional setup after loading the view.
+        loginScreenView.loginButton.addTarget(self, action: #selector(onLoginButtonTapped), for: .touchUpInside)
     }
     
-
-
+    @objc func onLoginButtonTapped() {
+        let tabBar = TabBarController()
+        tabBar.modalPresentationStyle = .fullScreen
+        present(tabBar, animated: true)
+    }
 }

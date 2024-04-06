@@ -23,6 +23,7 @@
 		76C045F22BBE055A009CD7E6 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C045F12BBE055A009CD7E6 /* Trip.swift */; };
 		76C045F52BBE0D8E009CD7E6 /* FindTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C045F42BBE0D8E009CD7E6 /* FindTripViewController.swift */; };
 		76C045F72BBE0DA2009CD7E6 /* FindTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C045F62BBE0DA2009CD7E6 /* FindTripView.swift */; };
+		FC4DF62E2BC0F9240064F49C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4DF62D2BC0F9240064F49C /* CalendarViewController.swift */; };
 		FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */; };
 		FC6EB95F2BBB822E002327C2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */; };
 		FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB9602BBB82C3002327C2 /* TabBarController.swift */; };
@@ -36,6 +37,12 @@
 		FC840C472B92B72300EC7B38 /* EduRideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C462B92B72300EC7B38 /* EduRideTests.swift */; };
 		FC840C512B92B72300EC7B38 /* EduRideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C502B92B72300EC7B38 /* EduRideUITests.swift */; };
 		FC840C532B92B72300EC7B38 /* EduRideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C522B92B72300EC7B38 /* EduRideUITestsLaunchTests.swift */; };
+		FC9A18152BC1078A00F69983 /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A18142BC1078A00F69983 /* ChatScreenView.swift */; };
+		FC9A18172BC107B400F69983 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A18162BC107B400F69983 /* ChatTableViewCell.swift */; };
+		FC9A181A2BC10F1B00F69983 /* SingleChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A18192BC10F1B00F69983 /* SingleChatViewController.swift */; };
+		FC9A181C2BC10F3B00F69983 /* SingleChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A181B2BC10F3B00F69983 /* SingleChatView.swift */; };
+		FC9A181F2BC10F6A00F69983 /* SingleChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A181E2BC10F6A00F69983 /* SingleChatTableViewCell.swift */; };
+		FC9A18212BC10FFD00F69983 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A18202BC10FFD00F69983 /* Chat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +79,7 @@
 		76C045F12BBE055A009CD7E6 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		76C045F42BBE0D8E009CD7E6 /* FindTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTripViewController.swift; sourceTree = "<group>"; };
 		76C045F62BBE0DA2009CD7E6 /* FindTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTripView.swift; sourceTree = "<group>"; };
+		FC4DF62D2BC0F9240064F49C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FC6EB9602BBB82C3002327C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -89,6 +97,12 @@
 		FC840C4C2B92B72300EC7B38 /* EduRideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduRideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC840C502B92B72300EC7B38 /* EduRideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduRideUITests.swift; sourceTree = "<group>"; };
 		FC840C522B92B72300EC7B38 /* EduRideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduRideUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FC9A18142BC1078A00F69983 /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
+		FC9A18162BC107B400F69983 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		FC9A18192BC10F1B00F69983 /* SingleChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatViewController.swift; sourceTree = "<group>"; };
+		FC9A181B2BC10F3B00F69983 /* SingleChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatView.swift; sourceTree = "<group>"; };
+		FC9A181E2BC10F6A00F69983 /* SingleChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatTableViewCell.swift; sourceTree = "<group>"; };
+		FC9A18202BC10FFD00F69983 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,10 +208,13 @@
 			isa = PBXGroup;
 			children = (
 				76C045F32BBE0D78009CD7E6 /* FindTrip */,
+				FC9A18182BC107BA00F69983 /* ChatView */,
+				FC9A181D2BC10F4200F69983 /* SingleChatView */,
 				76C045D42BBCC425009CD7E6 /* OfferTrip */,
+				FC9A18202BC10FFD00F69983 /* Chat.swift */,
+				FC4DF62D2BC0F9240064F49C /* CalendarViewController.swift */,
 				FC6EB9622BBB8A49002327C2 /* HomeViewController.swift */,
 				FC840C332B92B72200EC7B38 /* LoginViewController.swift */,
-				FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */,
 				FC6EB95E2BBB822E002327C2 /* ProfileViewController.swift */,
 				FC6EB9602BBB82C3002327C2 /* TabBarController.swift */,
 				FC840C2F2B92B72200EC7B38 /* AppDelegate.swift */,
@@ -227,6 +244,26 @@
 			path = EduRideUITests;
 			sourceTree = "<group>";
 		};
+		FC9A18182BC107BA00F69983 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */,
+				FC9A18142BC1078A00F69983 /* ChatScreenView.swift */,
+				FC9A18162BC107B400F69983 /* ChatTableViewCell.swift */,
+			);
+			path = ChatView;
+			sourceTree = "<group>";
+		};
+		FC9A181D2BC10F4200F69983 /* SingleChatView */ = {
+			isa = PBXGroup;
+			children = (
+				FC9A18192BC10F1B00F69983 /* SingleChatViewController.swift */,
+				FC9A181B2BC10F3B00F69983 /* SingleChatView.swift */,
+				FC9A181E2BC10F6A00F69983 /* SingleChatTableViewCell.swift */,
+			);
+			path = SingleChatView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -243,6 +280,8 @@
 			dependencies = (
 			);
 			name = EduRide;
+			packageProductDependencies = (
+			);
 			productName = EduRide;
 			productReference = FC840C2C2B92B72200EC7B38 /* EduRide.app */;
 			productType = "com.apple.product-type.application";
@@ -361,15 +400,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9A181C2BC10F3B00F69983 /* SingleChatView.swift in Sources */,
+				FC4DF62E2BC0F9240064F49C /* CalendarViewController.swift in Sources */,
+				FC9A181A2BC10F1B00F69983 /* SingleChatViewController.swift in Sources */,
 				76C045DC2BBD00E8009CD7E6 /* SearchTableViewManager.swift in Sources */,
 				76C045D62BBCC442009CD7E6 /* OfferTripViewController.swift in Sources */,
 				76C045D82BBCC453009CD7E6 /* OfferTripView.swift in Sources */,
 				FC840C342B92B72200EC7B38 /* LoginViewController.swift in Sources */,
 				FC840C302B92B72200EC7B38 /* AppDelegate.swift in Sources */,
+				FC9A18152BC1078A00F69983 /* ChatScreenView.swift in Sources */,
 				FC6EB95F2BBB822E002327C2 /* ProfileViewController.swift in Sources */,
 				FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */,
 				76C045DA2BBCF903009CD7E6 /* SearchTableViewCell.swift in Sources */,
 				76C045F72BBE0DA2009CD7E6 /* FindTripView.swift in Sources */,
+				FC9A18212BC10FFD00F69983 /* Chat.swift in Sources */,
+				FC9A18172BC107B400F69983 /* ChatTableViewCell.swift in Sources */,
 				76C045E92BBDDDA2009CD7E6 /* TripConfirmationView.swift in Sources */,
 				FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */,
 				76635C9D2BC03D9400B6518F /* TripDetail.swift in Sources */,
@@ -382,6 +427,7 @@
 				76C045EE2BBDDE24009CD7E6 /* TripConfirmationViewController.swift in Sources */,
 				FC840C322B92B72200EC7B38 /* SceneDelegate.swift in Sources */,
 				76C045DE2BBD01FA009CD7E6 /* LoadPlaces.swift in Sources */,
+				FC9A181F2BC10F6A00F69983 /* SingleChatTableViewCell.swift in Sources */,
 				76C045F52BBE0D8E009CD7E6 /* FindTripViewController.swift in Sources */,
 				76C045E02BBDA7AE009CD7E6 /* LocationManager.swift in Sources */,
 			);

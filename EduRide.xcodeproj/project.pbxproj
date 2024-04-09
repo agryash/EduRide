@@ -39,7 +39,6 @@
 		767E71702BC0AC3600B96A7A /* TripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E716F2BC0AC3600B96A7A /* TripDetailsViewController.swift */; };
 		767E71722BC0AC4900B96A7A /* TripDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71712BC0AC4900B96A7A /* TripDetailsView.swift */; };
 		767E71742BC0AC5A00B96A7A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71732BC0AC5A00B96A7A /* CardView.swift */; };
-		FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */; };
 		FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB9602BBB82C3002327C2 /* TabBarController.swift */; };
 		FC6EB9632BBB8A49002327C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6EB9622BBB8A49002327C2 /* HomeViewController.swift */; };
 		FC840C302B92B72200EC7B38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C2F2B92B72200EC7B38 /* AppDelegate.swift */; };
@@ -51,6 +50,13 @@
 		FC840C472B92B72300EC7B38 /* EduRideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C462B92B72300EC7B38 /* EduRideTests.swift */; };
 		FC840C512B92B72300EC7B38 /* EduRideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C502B92B72300EC7B38 /* EduRideUITests.swift */; };
 		FC840C532B92B72300EC7B38 /* EduRideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC840C522B92B72300EC7B38 /* EduRideUITestsLaunchTests.swift */; };
+		FCB8C4D12BC4CA73007FE672 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8C4D02BC4CA73007FE672 /* Chat.swift */; };
+		FCB8C4D62BC4CA85007FE672 /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8C4D22BC4CA85007FE672 /* ChatScreenView.swift */; };
+		FCB8C4D72BC4CA85007FE672 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8C4D32BC4CA85007FE672 /* ChatTableViewCell.swift */; };
+		FCB8C4D82BC4CA85007FE672 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8C4D42BC4CA85007FE672 /* ChatViewController.swift */; };
+		FCB8C4DD2BC4CAD6007FE672 /* SingleChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8C4D92BC4CAD6007FE672 /* SingleChatTableViewCell.swift */; };
+		FCB8C4DE2BC4CAD6007FE672 /* SingleChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8C4DA2BC4CAD6007FE672 /* SingleChatView.swift */; };
+		FCB8C4DF2BC4CAD6007FE672 /* SingleChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8C4DB2BC4CAD6007FE672 /* SingleChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,7 +109,6 @@
 		767E716F2BC0AC3600B96A7A /* TripDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
 		767E71712BC0AC4900B96A7A /* TripDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsView.swift; sourceTree = "<group>"; };
 		767E71732BC0AC5A00B96A7A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		FC6EB9602BBB82C3002327C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FC6EB9622BBB8A49002327C2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FC840C2C2B92B72200EC7B38 /* EduRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +124,13 @@
 		FC840C4C2B92B72300EC7B38 /* EduRideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduRideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC840C502B92B72300EC7B38 /* EduRideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduRideUITests.swift; sourceTree = "<group>"; };
 		FC840C522B92B72300EC7B38 /* EduRideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduRideUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FCB8C4D02BC4CA73007FE672 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		FCB8C4D22BC4CA85007FE672 /* ChatScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
+		FCB8C4D32BC4CA85007FE672 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		FCB8C4D42BC4CA85007FE672 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		FCB8C4D92BC4CAD6007FE672 /* SingleChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatTableViewCell.swift; sourceTree = "<group>"; };
+		FCB8C4DA2BC4CAD6007FE672 /* SingleChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatView.swift; sourceTree = "<group>"; };
+		FCB8C4DB2BC4CAD6007FE672 /* SingleChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,8 +302,10 @@
 				767E712F2BC0A59100B96A7A /* Register */,
 				382F271C2BBC9BBA00DB7315 /* LoginScreen */,
 				382F27172BBC9ADE00DB7315 /* MainScreen */,
+				FCB8C4D52BC4CA85007FE672 /* ChatView */,
+				FCB8C4DC2BC4CAD6007FE672 /* SingleChatView */,
+				FCB8C4D02BC4CA73007FE672 /* Chat.swift */,
 				FC6EB9622BBB8A49002327C2 /* HomeViewController.swift */,
-				FC6EB95B2BBB81FC002327C2 /* ChatViewController.swift */,
 				FC6EB9602BBB82C3002327C2 /* TabBarController.swift */,
 				FC840C2F2B92B72200EC7B38 /* AppDelegate.swift */,
 				FC840C312B92B72200EC7B38 /* SceneDelegate.swift */,
@@ -318,6 +332,26 @@
 				FC840C522B92B72300EC7B38 /* EduRideUITestsLaunchTests.swift */,
 			);
 			path = EduRideUITests;
+			sourceTree = "<group>";
+		};
+		FCB8C4D52BC4CA85007FE672 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				FCB8C4D22BC4CA85007FE672 /* ChatScreenView.swift */,
+				FCB8C4D32BC4CA85007FE672 /* ChatTableViewCell.swift */,
+				FCB8C4D42BC4CA85007FE672 /* ChatViewController.swift */,
+			);
+			path = ChatView;
+			sourceTree = "<group>";
+		};
+		FCB8C4DC2BC4CAD6007FE672 /* SingleChatView */ = {
+			isa = PBXGroup;
+			children = (
+				FCB8C4D92BC4CAD6007FE672 /* SingleChatTableViewCell.swift */,
+				FCB8C4DA2BC4CAD6007FE672 /* SingleChatView.swift */,
+				FCB8C4DB2BC4CAD6007FE672 /* SingleChatViewController.swift */,
+			);
+			path = SingleChatView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,12 +492,17 @@
 				382F271B2BBC9BB300DB7315 /* LoginScreenViewController.swift in Sources */,
 				382F27192BBC9BA400DB7315 /* LoginScreenView.swift in Sources */,
 				767E71672BC0AB6100B96A7A /* ProfileViewController.swift in Sources */,
+				FCB8C4D72BC4CA85007FE672 /* ChatTableViewCell.swift in Sources */,
 				767E71422BC0A8A700B96A7A /* FindTripView.swift in Sources */,
 				767E71582BC0A9ED00B96A7A /* TripConfirmationView.swift in Sources */,
+				FCB8C4DF2BC4CAD6007FE672 /* SingleChatViewController.swift in Sources */,
+				FCB8C4D82BC4CA85007FE672 /* ChatViewController.swift in Sources */,
+				FCB8C4DE2BC4CAD6007FE672 /* SingleChatView.swift in Sources */,
 				767E71332BC0A5B800B96A7A /* RegisterViewController.swift in Sources */,
 				767E71692BC0AB6D00B96A7A /* EditProfileViewController.swift in Sources */,
 				767E71462BC0A8D100B96A7A /* TripCardView.swift in Sources */,
 				767E716B2BC0AB8000B96A7A /* ProfileView.swift in Sources */,
+				FCB8C4D12BC4CA73007FE672 /* Chat.swift in Sources */,
 				767E713C2BC0A7C500B96A7A /* PendingRequestCardView.swift in Sources */,
 				767E71642BC0AAD400B96A7A /* SearchTableViewManager.swift in Sources */,
 				767E715E2BC0AA8E00B96A7A /* LoadPlaces.swift in Sources */,
@@ -476,12 +515,12 @@
 				FC840C302B92B72200EC7B38 /* AppDelegate.swift in Sources */,
 				767E714E2BC0A95700B96A7A /* Place.swift in Sources */,
 				FC6EB9612BBB82C3002327C2 /* TabBarController.swift in Sources */,
+				FCB8C4D62BC4CA85007FE672 /* ChatScreenView.swift in Sources */,
 				382F27162BBC9A9500DB7315 /* MainScreenView.swift in Sources */,
 				767E71742BC0AC5A00B96A7A /* CardView.swift in Sources */,
 				767E71722BC0AC4900B96A7A /* TripDetailsView.swift in Sources */,
 				767E71702BC0AC3600B96A7A /* TripDetailsViewController.swift in Sources */,
 				767E71622BC0AABE00B96A7A /* MapAnnotationDelegate.swift in Sources */,
-				FC6EB95C2BBB81FC002327C2 /* ChatViewController.swift in Sources */,
 				767E713E2BC0A7D200B96A7A /* SentRequestCardView.swift in Sources */,
 				767E71562BC0A9D200B96A7A /* SearchTableViewCell.swift in Sources */,
 				FC6EB9632BBB8A49002327C2 /* HomeViewController.swift in Sources */,
@@ -489,6 +528,7 @@
 				767E71442BC0A8B900B96A7A /* FindTripViewController.swift in Sources */,
 				767E71522BC0A97800B96A7A /* MapLocation.swift in Sources */,
 				767E71362BC0A77200B96A7A /* MyTripsViewController.swift in Sources */,
+				FCB8C4DD2BC4CAD6007FE672 /* SingleChatTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

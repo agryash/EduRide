@@ -20,12 +20,13 @@ class TabBarController: UITabBarController {
     
     private func setupTabs(){
         
-        let find = self.createNav(with: "Find Trip", and: UIImage (systemName: "house"), vc: FindTripViewController())
-        let offer = self.createNav(with: "Offer Trip", and: UIImage (systemName: "house"), vc: OfferTripViewController())
-        let chat = self.createNav(with: "My Trips", and: UIImage(systemName:"message"), vc: MyTripsViewController())
+        let offer = self.createNav(with: "Offer Trip", and: UIImage (systemName: "airplane.departure"), vc: OfferTripViewController())
+        let find = self.createNav(with: "Find Trip", and: UIImage(systemName:"magnifyingglass"), vc: FindTripViewController())
+        let chat = self.createNav(with: "Chat", and: UIImage (systemName:"message"), vc: ChatViewController())
         let profile = self.createNav(with: "Profile", and: UIImage (systemName:"person"), vc: ProfileViewController())
         
-        self.setViewControllers([find, offer, chat, profile], animated:true)
+        
+        self.setViewControllers([offer, find, chat, profile], animated:true)
     }
     
     private func createNav(with title:String, and image: UIImage?, vc: UIViewController) -> UINavigationController {

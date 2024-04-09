@@ -34,7 +34,8 @@ class MainViewController: UIViewController {
             } else {
                 self.currentUser = user
                 let tabBar = TabBarController()
-                self.navigationController?.pushViewController(tabBar, animated: true)
+                tabBar.modalPresentationStyle = .fullScreen
+                self.present(tabBar, animated: true)
             }
         }
     }

@@ -41,9 +41,13 @@ class RegisterViewController: UIViewController {
                 Auth.auth().createUser(withEmail: email, password: password, completion: {result, error in
                     if error == nil {
                         self.setNameOfTheUserInFirebaseAuth(name: name)
+//                        let tabBar = TabBarController()
+//                        self.clearAddViewFields()
+//                        self.navigationController?.pushViewController(tabBar, animated: true)
                         let tabBar = TabBarController()
                         self.clearAddViewFields()
-                        self.navigationController?.pushViewController(tabBar, animated: true)
+                        tabBar.modalPresentationStyle = .fullScreen
+                        self.present(tabBar, animated: true)
                     } else {
                         self.showInvalidErrorAlert(message: error!.localizedDescription)
                     }

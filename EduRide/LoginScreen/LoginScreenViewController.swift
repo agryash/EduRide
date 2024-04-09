@@ -34,7 +34,9 @@ class LoginScreenViewController: UIViewController {
                     } else {
                         let tabBar = TabBarController()
                         self.clearAddViewFields()
-                        self.navigationController?.pushViewController(tabBar, animated: true)
+                        tabBar.modalPresentationStyle = .fullScreen
+                                present(tabBar, animated: true)
+                        //self.navigationController?.pushViewController(tabBar, animated: true)
                     }
                 }
             } else {

@@ -34,9 +34,15 @@ class ProfileViewController: UIViewController {
     @objc func logoutButtonTapped() {
         do {
             try Auth.auth().signOut()
-            self.navigationController?.popToRootViewController(animated: true)
+//            self.navigationController?.popToRootViewController(animated: true)
+//            let vc = MainViewController()
+//            vc.hidesBottomBarWhenPushed = true
+//            navigationController?.pushViewController(vc, animated: true)
+            dismiss(animated: true) {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         } catch {
-            
+            print("Logout failed")
         }
     }
 

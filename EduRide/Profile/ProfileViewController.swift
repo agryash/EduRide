@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 
@@ -21,10 +22,22 @@ class ProfileViewController: UIViewController {
         
         let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
         navigationItem.rightBarButtonItem = editButton
+        
+        profileScreen.logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
     }
     
     @objc func editButtonTapped() {
         let editController = EditProfileViewController()
         navigationController?.pushViewController(editController, animated: true)
     }
+    
+    @objc func logoutButtonTapped() {
+        do {
+            try Auth.auth().signOut()
+            self.navigationController?.popToRootViewController(animated: true)
+        } catch {
+            
+        }
+    }
+
 }

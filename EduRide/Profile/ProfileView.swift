@@ -20,6 +20,7 @@ class ProfileView: UIView {
     var labelPhoneNumberValue: UILabel!
     var labelRoleValue: UILabel!
     var profileImage: UIImageView!
+    var logoutButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,6 +37,7 @@ class ProfileView: UIView {
         setupLabelPasswordValue()
         setupLabelPhoneNumberValue()
         setupLabelRoleValue()
+        setupButtonLogout()
         
         initConstraints()
     }
@@ -135,6 +137,21 @@ class ProfileView: UIView {
         self.addSubview(labelRoleValue)
     }
     
+    func setupButtonLogout() {
+        logoutButton = UIButton(type: .system)
+        logoutButton.setTitle("Logout", for: .normal)
+        logoutButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        logoutButton.setTitleColor(.white, for: .normal)
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        logoutButton.backgroundColor = .systemBlue
+        logoutButton.layer.cornerRadius = 10
+        
+        logoutButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+
+        self.addSubview(logoutButton)
+    }
+    
     func initConstraints() {
         
         NSLayoutConstraint.activate([
@@ -173,6 +190,12 @@ class ProfileView: UIView {
                 
             labelRoleValue.topAnchor.constraint(equalTo: labelPhoneNumber.bottomAnchor, constant: 20),
             labelRoleValue.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 190),
+            
+            logoutButton.topAnchor.constraint(equalTo: labelRoleValue.bottomAnchor, constant: 30),
+            logoutButton.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            logoutButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant:
+            16),
+            
         ])
     }
 }

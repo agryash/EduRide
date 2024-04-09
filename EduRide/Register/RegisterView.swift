@@ -13,19 +13,16 @@ class RegisterView: UIView {
     var labelEmail: UILabel!
     var labelPassword: UILabel!
     var labelPhoneNumber: UILabel!
-    var labelGender: UILabel!
-    var labelBirthDate: UILabel!
+    var labelRole: UILabel!
     var textFieldName: UITextField!
     var textFieldEmail: UITextField!
     var textFieldPassword: UITextField!
     var textFieldNumber: UITextField!
-    var textFieldGender: UITextField!
-    var textFieldBirthDate: UITextField!
+    var textFieldRole: UITextField!
     var buttonSignUp: UIButton!
-    let genderOptions = ["Female", "Male", "Other"]
+    let roleOptions = ["Driver", "Passenger"]
     var profileImage: UIImageView!
     var choosePicButton: UIButton!
-    var datePicker: UIDatePicker!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,14 +32,12 @@ class RegisterView: UIView {
         setupLabelEmail()
         setupLabelPassword()
         setupLabelPhoneNumber()
-        setupLabelGender()
-        setupLabelBirthDate()
+        setupLabelRole()
         setupTextFieldName()
         setupTextFieldEmail()
         setupTextFieldPassword()
         setupTextFieldNumber()
-        setupTextFieldGender()
-        setupTextFieldBirthDate()
+        setupTextFieldRole()
         setupButtonSignUp()
         setupImageView()
         setupChoosePicButton()
@@ -82,18 +77,11 @@ class RegisterView: UIView {
         self.addSubview(labelPhoneNumber)
     }
     
-    func setupLabelGender() {
-        labelGender = UILabel()
-        labelGender.text = "Gender:"
-        labelGender.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelGender)
-    }
-    
-    func setupLabelBirthDate() {
-        labelBirthDate = UILabel()
-        labelBirthDate.text = "Birth Date:"
-        labelBirthDate.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelBirthDate)
+    func setupLabelRole() {
+        labelRole = UILabel()
+        labelRole.text = "Role:"
+        labelRole.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(labelRole)
     }
     
     func setupTextFieldName() {
@@ -148,50 +136,23 @@ class RegisterView: UIView {
         self.addSubview(textFieldNumber)
     }
     
-    func setupTextFieldGender() {
-        textFieldGender = UITextField()
-        textFieldGender.placeholder = "Other"
-        textFieldGender.translatesAutoresizingMaskIntoConstraints = false
-        textFieldGender.borderStyle = .roundedRect
-        textFieldGender.layer.borderWidth = 1.0
-        textFieldGender.layer.borderColor = UIColor.gray.cgColor
-        textFieldGender.layer.cornerRadius = 10.0
-        textFieldGender.layer.masksToBounds = true
-        textFieldGender.font = UIFont.systemFont(ofSize: 14)
+    func setupTextFieldRole() {
+        textFieldRole = UITextField()
+        textFieldRole.placeholder = "Passenger"
+        textFieldRole.translatesAutoresizingMaskIntoConstraints = false
+        textFieldRole.borderStyle = .roundedRect
+        textFieldRole.layer.borderWidth = 1.0
+        textFieldRole.layer.borderColor = UIColor.gray.cgColor
+        textFieldRole.layer.cornerRadius = 10.0
+        textFieldRole.layer.masksToBounds = true
+        textFieldRole.font = UIFont.systemFont(ofSize: 14)
         
         let pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
-        textFieldGender.inputView = pickerView
+        textFieldRole.inputView = pickerView
                       
-        self.addSubview(textFieldGender)
-    }
-    
-    func setupTextFieldBirthDate() {
-        textFieldBirthDate = UITextField()
-        textFieldBirthDate.placeholder = "01/01/2000"
-        textFieldBirthDate.translatesAutoresizingMaskIntoConstraints = false
-        textFieldBirthDate.borderStyle = .roundedRect
-        textFieldBirthDate.layer.borderWidth = 1.0
-        textFieldBirthDate.layer.borderColor = UIColor.gray.cgColor
-        textFieldBirthDate.layer.cornerRadius = 10.0
-        textFieldBirthDate.layer.masksToBounds = true
-        textFieldBirthDate.font = UIFont.systemFont(ofSize: 14)
-        
-        datePicker = UIDatePicker.init(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 200))
-
-        datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
-        datePicker.preferredDatePickerStyle = .wheels
-        textFieldBirthDate.inputView = datePicker
-        
-        self.addSubview(textFieldBirthDate)
-    }
-    
-    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        textFieldBirthDate.text = dateFormatter.string(from: sender.date)
+        self.addSubview(textFieldRole)
     }
     
     func setupButtonSignUp() {
@@ -269,22 +230,15 @@ class RegisterView: UIView {
             textFieldNumber.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             textFieldNumber.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            labelGender.topAnchor.constraint(equalTo: textFieldNumber.bottomAnchor, constant: 16),
-            labelGender.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            labelRole.topAnchor.constraint(equalTo: textFieldNumber.bottomAnchor, constant: 16),
+            labelRole.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
                 
-            textFieldGender.topAnchor.constraint(equalTo: labelGender.bottomAnchor, constant: 16),
-            textFieldGender.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            textFieldGender.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            textFieldRole.topAnchor.constraint(equalTo: labelRole.bottomAnchor, constant: 16),
+            textFieldRole.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textFieldRole.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
                 
-            labelBirthDate.topAnchor.constraint(equalTo: textFieldGender.bottomAnchor, constant: 16),
-            labelBirthDate.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            
-            textFieldBirthDate.topAnchor.constraint(equalTo: labelBirthDate.bottomAnchor, constant: 16),
-            textFieldBirthDate.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            textFieldBirthDate.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-          
             buttonSignUp.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            buttonSignUp.topAnchor.constraint(equalTo: textFieldBirthDate.bottomAnchor, constant: 30),
+            buttonSignUp.topAnchor.constraint(equalTo: textFieldRole.bottomAnchor, constant: 30),
             buttonSignUp.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
         ])
     }
@@ -296,14 +250,14 @@ extension RegisterView: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return genderOptions.count
+        return roleOptions.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return genderOptions[row]
+        return roleOptions[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        textFieldGender.text = genderOptions[row]
+        textFieldRole.text = roleOptions[row]
     }
 }

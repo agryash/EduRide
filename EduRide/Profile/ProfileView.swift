@@ -13,14 +13,12 @@ class ProfileView: UIView {
     var labelEmail: UILabel!
     var labelPassword: UILabel!
     var labelPhoneNumber: UILabel!
-    var labelGender: UILabel!
-    var labelBirthDate: UILabel!
+    var labelRole: UILabel!
     var labelNameValue: UILabel!
     var labelEmailValue: UILabel!
     var labelPasswordValue: UILabel!
     var labelPhoneNumberValue: UILabel!
-    var labelGenderValue: UILabel!
-    var labelBirthDateValue: UILabel!
+    var labelRoleValue: UILabel!
     var profileImage: UIImageView!
     
     override init(frame: CGRect) {
@@ -31,15 +29,13 @@ class ProfileView: UIView {
         setupLabelEmail()
         setupLabelPassword()
         setupLabelPhoneNumber()
-        setupLabelGender()
-        setupLabelBirthDate()
+        setupLabelRole()
         setupImageView()
         setupLabelNameValue()
         setupLabelEmailValue()
         setupLabelPasswordValue()
         setupLabelPhoneNumberValue()
-        setupLabelGenderValue()
-        setupLabelBirthDateValue()
+        setupLabelRoleValue()
         
         initConstraints()
     }
@@ -80,20 +76,12 @@ class ProfileView: UIView {
         self.addSubview(labelPhoneNumber)
     }
     
-    func setupLabelGender() {
-        labelGender = UILabel()
-        labelGender.text = "Gender:"
-        labelGender.translatesAutoresizingMaskIntoConstraints = false
-        labelGender.font = UIFont.boldSystemFont(ofSize: 16)
-        self.addSubview(labelGender)
-    }
-    
-    func setupLabelBirthDate() {
-        labelBirthDate = UILabel()
-        labelBirthDate.text = "Birth Date:"
-        labelBirthDate.translatesAutoresizingMaskIntoConstraints = false
-        labelBirthDate.font = UIFont.boldSystemFont(ofSize: 16)
-        self.addSubview(labelBirthDate)
+    func setupLabelRole() {
+        labelRole = UILabel()
+        labelRole.text = "Role:"
+        labelRole.translatesAutoresizingMaskIntoConstraints = false
+        labelRole.font = UIFont.boldSystemFont(ofSize: 16)
+        self.addSubview(labelRole)
     }
         
     func setupImageView() {
@@ -139,20 +127,12 @@ class ProfileView: UIView {
         self.addSubview(labelPhoneNumberValue)
     }
     
-    func setupLabelGenderValue() {
-        labelGenderValue = UILabel()
-        labelGenderValue.text = "Male"
-        labelGenderValue.translatesAutoresizingMaskIntoConstraints = false
-        labelGenderValue.textColor = UIColor.darkGray
-        self.addSubview(labelGenderValue)
-    }
-    
-    func setupLabelBirthDateValue() {
-        labelBirthDateValue = UILabel()
-        labelBirthDateValue.text = "01/01/2000"
-        labelBirthDateValue.translatesAutoresizingMaskIntoConstraints = false
-        labelBirthDateValue.textColor = UIColor.darkGray
-        self.addSubview(labelBirthDateValue)
+    func setupLabelRoleValue() {
+        labelRoleValue = UILabel()
+        labelRoleValue.text = "Passenger"
+        labelRoleValue.translatesAutoresizingMaskIntoConstraints = false
+        labelRoleValue.textColor = UIColor.darkGray
+        self.addSubview(labelRoleValue)
     }
     
     func initConstraints() {
@@ -188,17 +168,11 @@ class ProfileView: UIView {
             labelPhoneNumberValue.topAnchor.constraint(equalTo: labelPassword.bottomAnchor, constant: 20),
             labelPhoneNumberValue.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 190),
             
-            labelGender.topAnchor.constraint(equalTo: labelPhoneNumber.bottomAnchor, constant: 20),
-            labelGender.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            labelRole.topAnchor.constraint(equalTo: labelPhoneNumber.bottomAnchor, constant: 20),
+            labelRole.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
                 
-            labelGenderValue.topAnchor.constraint(equalTo: labelPhoneNumber.bottomAnchor, constant: 20),
-            labelGenderValue.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 190),
-                
-            labelBirthDate.topAnchor.constraint(equalTo: labelGender.bottomAnchor, constant: 20),
-            labelBirthDate.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            labelBirthDateValue.topAnchor.constraint(equalTo: labelGender.bottomAnchor, constant: 20),
-            labelBirthDateValue.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 190),
+            labelRoleValue.topAnchor.constraint(equalTo: labelPhoneNumber.bottomAnchor, constant: 20),
+            labelRoleValue.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 190),
         ])
     }
 }

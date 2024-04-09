@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
@@ -21,6 +22,80 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Sign Up"
         registerScreen.choosePicButton.menu = getMenuImagePicker()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        
+        registerScreen.buttonSignUp.addTarget(self, action: #selector(onButtonRegisterTapped), for: .touchUpInside)
+    }
+    
+    @objc func hideKeyboardOnTap() {
+        view.endEditing(true)
+    }
+    
+    @objc func onButtonRegisterTapped() {
+        if let name = registerScreen.textFieldName.text, !name.isEmpty,
+           let email = registerScreen.textFieldEmail.text, !email.isEmpty,
+           let password = registerScreen.textFieldPassword.text, !password.isEmpty {
+            if (isValidEmail(email)) {
+                Auth.auth().createUser(withEmail: email, password: password, completion: {result, error in
+                    if error == nil {
+                        self.setNameOfTheUserInFirebaseAuth(name: name)
+                        let tabBar = TabBarController()
+                        self.clearAddViewFields()
+                        self.navigationController?.pushViewController(tabBar, animated: true)
+                    } else {
+                        self.showInvalidErrorAlert(message: error!.localizedDescription)
+                    }
+                })
+            } else {
+                showInvalidErrorAlert(message: "Invalid Email id")
+            }
+        } else {
+            showErrorAlert()
+        }
+    }
+    
+    func setNameOfTheUserInFirebaseAuth(name: String) {
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = name
+        changeRequest?.commitChanges(completion: {(error) in
+            if error == nil {
+            } else {
+                print("Error occured: \(String(describing: error))")
+            }
+        })
+    }
+
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+
+    func showErrorAlert() {
+        let alert = UIAlertController(
+            title: "Error!", message: "Text Fields must not be empty!",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
+
+    func showInvalidErrorAlert(message: String) {
+        let alert = UIAlertController(
+            title: "Error!", message: message,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
+
+    func clearAddViewFields() {
+        registerScreen.textFieldEmail.text = ""
+        registerScreen.textFieldPassword.text = ""
     }
     
     func getMenuImagePicker() -> UIMenu{

@@ -48,7 +48,7 @@ class MainScreenView: UIView {
 
     }
     
-    func setupLoginButton(){
+    func setupLoginButton() {
         loginButton = UIButton(type: .system)
         loginButton.backgroundColor = UIColor.systemBlue
         loginButton.setTitleColor(.white, for: .normal)

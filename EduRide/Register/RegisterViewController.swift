@@ -40,6 +40,8 @@ class RegisterViewController: UIViewController {
             if (isValidEmail(email)) {
                 Auth.auth().createUser(withEmail: email, password: password, completion: {result, error in
                     if error == nil {
+                        print(email)
+                        print(password)
                         self.setNameOfTheUserInFirebaseAuth(name: name)
 //                        let tabBar = TabBarController()
 //                        self.clearAddViewFields()

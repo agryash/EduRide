@@ -65,14 +65,14 @@ class RegisterView: UIView {
     
     func setupLabelPassword() {
         labelPassword = UILabel()
-        labelPassword.text = "Phone Number:"
+        labelPassword.text = "Password:"
         labelPassword.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(labelPassword)
     }
     
     func setupLabelPhoneNumber() {
         labelPhoneNumber = UILabel()
-        labelPhoneNumber.text = "Password:"
+        labelPhoneNumber.text = "Phone Number:"
         labelPhoneNumber.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(labelPhoneNumber)
     }

@@ -34,14 +34,14 @@ class ProfileViewController: UIViewController {
     @objc func logoutButtonTapped() {
         do {
             try Auth.auth().signOut()
-//            self.navigationController?.popToRootViewController(animated: true)
-//            let vc = MainViewController()
-//            vc.hidesBottomBarWhenPushed = true
-//            navigationController?.pushViewController(vc, animated: true)
-            dismiss(animated: true) {
-                self.navigationController?.popToRootViewController(animated: true)
+            
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                let entryViewController = MainViewController() // Your view controller initialization
+                let navigationController = UINavigationController(rootViewController: entryViewController)
+                sceneDelegate.window?.rootViewController = navigationController
             }
-        } catch {
+        }
+        catch {
             print("Logout failed")
         }
     }

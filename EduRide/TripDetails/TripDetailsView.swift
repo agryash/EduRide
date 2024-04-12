@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class TripDetailsView: UIView {
     
@@ -14,6 +15,7 @@ class TripDetailsView: UIView {
     var labelDriver: UILabel!
     var labelCoPassengers: UILabel!
     var driverCardView = CardView()
+    var mapView:MKMapView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +25,7 @@ class TripDetailsView: UIView {
         setupLabelCoPassengers()
         setupDriverCardView()
         setupCoPassengerCardView()
-                
+        setupMapview()
         initConstraints()
     }
     
@@ -83,9 +85,21 @@ class TripDetailsView: UIView {
         }
     }
     
+    func setupMapview() {
+        mapView = MKMapView()
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.layer.cornerRadius = 10
+        self.addSubview(mapView)
+    }
+    
     func initConstraints() {
             NSLayoutConstraint.activate([
-                labelDriver.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30),
+                mapView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
+                mapView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                mapView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+                mapView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
+                
+                labelDriver.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 30),
                 labelDriver.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
 
                 driverCardView.topAnchor.constraint(equalTo: labelDriver.bottomAnchor, constant: 16),
@@ -94,6 +108,8 @@ class TripDetailsView: UIView {
                 
                 labelCoPassengers.topAnchor.constraint(equalTo: driverCardView.bottomAnchor, constant: 20),
                 labelCoPassengers.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                
+                
             ])
     }
 }

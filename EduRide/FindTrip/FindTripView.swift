@@ -50,13 +50,14 @@ class FindTripView: UIView {
         self.addSubview(tripsLabel)
     }
     
-    func setupTripsCardView(trips: [TripDetail]) {
+    func setupTripsCardView(trips: [Trip]) {
+        print("in find trips view \(trips)")
         for (index, trip) in trips.enumerated() {
             let coPassCardView = TripCardView()
             coPassCardView.translatesAutoresizingMaskIntoConstraints = false
             addSubview(coPassCardView)
             
-            coPassCardView.nameLabel.text = trip.driver
+            coPassCardView.nameLabel.text = trip.userEmail
             coPassCardView.priceLabel.text = "$\(String(format: "%.2f", trip.pricePerSeat))"
             coPassCardView.acceptButton.tag = index
             coPassCardView.rejectButton.tag = index

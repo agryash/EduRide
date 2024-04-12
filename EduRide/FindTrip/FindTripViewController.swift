@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class FindTripViewController: UIViewController {
     let findTripsScreen = FindTripView()
-    var trips = [TripDetail]()
+    var trips = [Trip]()
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var currEmail = ""
     
     override func loadView() {
         view = findTripsScreen
@@ -19,37 +22,34 @@ class FindTripViewController: UIViewController {
         super.viewDidLoad()
         title = "Find Trips"
         findTripsScreen.datePicker.addTarget(self, action: #selector(onDateChange), for: .valueChanged)
-        loadTripsOnDate(date: "")
+        loadTripsOnDate(tripDate: Date())
+        
+        handleAuth = Auth.auth().addStateDidChangeListener{auth, user in
+            if user != nil {
+                self.currEmail = (user?.email!)!
+            }
+        }
     }
     
     @objc func onDateChange(sender: UIDatePicker) {
-        print("Value Changed")
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        var tripDate = formatter.string(from: sender.date)
-        loadTripsOnDate(date: tripDate)
-        
+        loadTripsOnDate(tripDate: sender.date)
     }
 
     
-    func loadTripsOnDate(date: String) {
-        print("loading trips on date")
-        let sourceLocation = MapLocation(name: "Central Park", latitude: 40.785091, longitude: -73.968285)
-        let destinationLocation = MapLocation(name: "Times Square", latitude: 40.7580, longitude: -73.9855)
+    func loadTripsOnDate(tripDate: Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        var date = formatter.string(from: tripDate)
 
-        let trip = TripDetail(source: sourceLocation,
-                        destination: destinationLocation,
-                        driver: "user123",
-                        numberOfSeats: 4,
-                        pricePerSeat: 15.0,
-                        startTime: "6:00 AM",
-                        tripId: "1"
-                        )
-        
-        trips.append(trip)
-        trips.append(trip)
-        trips.append(trip)
-        cardViewReload()
+        DatabaseManager.shared.findTripsBy(with: date, completion: { [weak self] result in
+            switch result {
+            case .success(let trips):
+                self?.trips = trips
+                self?.cardViewReload()
+            case .failure(let error):
+                print("Failed to get users: \(error)")
+            }
+        })
     }
     
     func cardViewReload() {
@@ -67,16 +67,31 @@ class FindTripViewController: UIViewController {
     @objc func onBookRideTapped(_ sender: UIButton) {
         let index = sender.tag
         let trip = trips[index]
-        let name = trip.driver
-        
-        print("Book ride button tapped for trip: \(name)")
+        let name = trip.userEmail
+        if let tripId = trip.id {
+            let request = Request(tripId: tripId, user: currEmail, status: "pending")
+            DatabaseManager.shared.createRequest(with: request)
+            showAlert(status: "Success!", text: "Ride Requested")
+        }
+        showAlert(status: "Error!", text: "Could not fetch trip")
     }
     
     @objc func onRideDetailsTapped(_ sender: UIButton) {
         let index = sender.tag
         let trip = trips[index]
-        let tripId = trip.tripId
         
-        print("Ride details button tapped for trip: \(index)")
+        let tripDetailsViewController = TripDetailsViewController()
+        tripDetailsViewController.tripId = trip.id
+        navigationController?.pushViewController(tripDetailsViewController, animated: true)
+    }
+    
+    func showAlert(status: String, text: String) {
+        let alert = UIAlertController(
+            title: "\(status)", message: "\(text)",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }

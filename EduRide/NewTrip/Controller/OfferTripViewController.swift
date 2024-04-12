@@ -87,17 +87,15 @@ extension MKMapView {
         setRegion(coordinateRegion, animated: true)
     }
     
-    func spanBetweenLocations(source: MKMapItem?, destination: MKMapItem?) {
-        if let location1 = source?.placemark.coordinate, let location2 = destination?.placemark.coordinate {
-            let midLatitude = (location1.latitude + location2.latitude) / 2
-            let midLongitude = (location1.longitude + location2.longitude) / 2
-            let center = CLLocationCoordinate2D(latitude: midLatitude, longitude: midLongitude)
+    func spanBetweenLocations(sourceLatitude: Double, destinationLatitude: Double, sourceLongitude: Double, destinationLongitude: Double) {
+        let midLatitude = (sourceLatitude + destinationLatitude) / 2
+        let midLongitude = (sourceLongitude + destinationLongitude) / 2
+        let center = CLLocationCoordinate2D(latitude: midLatitude, longitude: midLongitude)
 
-            let span = MKCoordinateSpan(latitudeDelta: abs(location1.latitude  - location2.latitude) * 2,
-                                         longitudeDelta: abs(location1.longitude - location2.longitude) * 2)
-            let region = MKCoordinateRegion(center: center, span: span)
+        let span = MKCoordinateSpan(latitudeDelta: abs(sourceLatitude  - destinationLatitude) * 2,
+                                     longitudeDelta: abs(sourceLongitude - destinationLongitude) * 2)
+        let region = MKCoordinateRegion(center: center, span: span)
 
-            setRegion(region, animated: true)
-        }
+        setRegion(region, animated: true)
     }
 }

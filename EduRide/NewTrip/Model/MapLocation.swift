@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MapLocation {
+class MapLocation: Decodable {
     var name: String
     var latitude: Double
     var longitude: Double

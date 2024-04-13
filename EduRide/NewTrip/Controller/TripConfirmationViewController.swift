@@ -7,12 +7,16 @@
 
 import UIKit
 import MapKit
+import FirebaseAuth
 
 class TripConfirmationViewController: UIViewController {
     let tripConfirmationScreen = TripConfirmationView()
     var tripStartTime: String!
+    var tripStartDate: String!
     var source: MKMapItem?
     var destination: MKMapItem?
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var currEmail = ""
     
     override func loadView() {
         view = tripConfirmationScreen
@@ -23,6 +27,12 @@ class TripConfirmationViewController: UIViewController {
         title = "Confirm Trip"
         tripConfirmationScreen.confirmButton.addTarget(self, action: #selector(onConfirm), for: .touchUpInside)
         tripConfirmationScreen.startTime.addTarget(self, action: #selector(onStartTimeChanged), for: .valueChanged)
+        
+        handleAuth = Auth.auth().addStateDidChangeListener{auth, user in
+            if user != nil {
+                self.currEmail = (user?.email!)!
+            }
+        }
     }
     
     @objc func onConfirm() {
@@ -32,19 +42,26 @@ class TripConfirmationViewController: UIViewController {
            let destinationCoordinates = destination?.placemark.coordinate,
            let seatsText = tripConfirmationScreen.seatsInput.text,
            let priceText = tripConfirmationScreen.pricePerSeat.text,
+           let startDateText = tripStartDate,
            let startTimeText = tripStartTime {
-            
             let sourceLocation = MapLocation(name: sourceName, latitude: sourceCoordinates.latitude, longitude: sourceCoordinates.longitude)
             let destinationLocation = MapLocation(name: destinationName, latitude: destinationCoordinates.latitude, longitude: destinationCoordinates.longitude)
             
             if let seats = Int (seatsText),
                let price = Double (priceText) {
-                let trip = Trip(source: sourceLocation,
-                                destination: destinationLocation,
-                                userId: "user123",
+                let trip = Trip(sourceName: sourceName,
+                                destinationName: destinationName,
+                                sourceLatitude: sourceCoordinates.latitude,
+                                sourceLongitude: sourceCoordinates.longitude,
+                                destinationLatitude: destinationCoordinates.latitude,
+                                destinationLongitude: destinationCoordinates.longitude,
+                                userEmail: currEmail,
                                 numberOfSeats: seats,
                                 pricePerSeat: price,
+                                startDate: startDateText,
                                 startTime: startTimeText)
+                print("herererere")
+                DatabaseManager.shared.createTrip(with: trip)
             }
         }
     
@@ -52,8 +69,12 @@ class TripConfirmationViewController: UIViewController {
     }
     
     @objc func onStartTimeChanged(sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        tripStartTime = formatter.string(from: sender.date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        tripStartDate = dateFormatter.string(from: sender.date)
+
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm:ss"
+        tripStartTime = timeFormatter.string(from: sender.date)
     }
 }

@@ -45,10 +45,15 @@ extension OfferTripViewController: UITableViewDelegate, UITableViewDataSource{
             self.offerTripScreen.newTripButton.isHidden = false
             self.offerTripScreen.searchWrapperView.isHidden = true
 
-            offerTripScreen.mapView.spanBetweenLocations(source: self.source, destination: self.destination)
+            
             
             // Mark source and destination on the map
             if let src = self.source, let dest = self.destination {
+                offerTripScreen.mapView.spanBetweenLocations(
+                    sourceLatitude: src.placemark.coordinate.latitude,
+                    destinationLatitude: dest.placemark.coordinate.latitude,
+                    sourceLongitude: src.placemark.coordinate.longitude,
+                    destinationLongitude: dest.placemark.coordinate.longitude)
                 let source = Place(
                     title: "Source",
                     coordinate: CLLocationCoordinate2D(latitude: src.placemark.coordinate.latitude, longitude: src.placemark.coordinate.longitude),

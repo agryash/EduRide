@@ -29,12 +29,12 @@ final class DatabaseManager{
             "startTime": trip.startTime,
             "userEmail": trip.userEmail
           ])
-          print("User created with ID: \(ref.documentID)")
+//          print("User created with ID: \(ref.documentID)")
         }
     }
     
     func findTripsBy(with startDate: String, completion: @escaping (Result<Array<Trip>, Error>) -> Void) {
-        print("finding trips \(startDate)")
+//        print("finding trips \(startDate)")
         var trips = [Trip]()
         
         self.db.collection("trips")
@@ -50,7 +50,7 @@ final class DatabaseManager{
                             let trip = try document.data(as: Trip.self)
                             trip.id = document.documentID
                             if trip.startDate == startDate && trip.numberOfSeats > 0 {
-                                print(trip.sourceName)
+//                                print(trip.sourceName)
                                 trips.append(trip)
                             }
                             
@@ -73,8 +73,40 @@ final class DatabaseManager{
             "user": request.user,
             "status": request.status
           ])
-          print("Request created with ID: \(ref.documentID)")
+//          print("Request created with ID: \(ref.documentID)")
         }
+    }
+    
+    public func findTripsForUser(with userEmail: String, completion: @escaping (Result<Array<Trip>, Error>) -> Void) {
+        print("findTripsForUSer")
+        print("finding trips for user \(userEmail)")
+        var trips = [Trip]()
+        
+        self.db.collection("trips")
+            .addSnapshotListener(includeMetadataChanges: false) { querySnapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                if let documents = querySnapshot?.documents {
+                    for document in documents {
+                        do {
+                            let trip = try document.data(as: Trip.self)
+                            trip.id = document.documentID
+                            if trip.userEmail == userEmail {
+                                print(trip.id)
+                                print(trip.sourceName)
+                                trips.append(trip)
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    completion(.success(trips))
+                } else {
+                    completion(.success(trips))
+                }
+            }
     }
 }
 

@@ -50,6 +50,21 @@ class FindTripViewController: UIViewController {
                 print("Failed to get users: \(error)")
             }
         })
+        
+        DatabaseManager.shared.findTripsForUser(with: "ad@gmail.com") { result in
+            switch result {
+            case .success(let trips):
+                // Handle the array of Trip objects received
+                // This block executes when the operation succeeds
+//                print("Received trips:", trips)
+                print()
+            case .failure(let error):
+                // Handle the error that occurred
+                // This block executes when the operation fails
+                print("Error occurred:", error)
+            }
+        }
+                                    
     }
     
     func cardViewReload() {

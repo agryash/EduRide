@@ -11,10 +11,13 @@ class PendingRequestCardView: UIView {
     
     var profileImageView: UIImageView!
     var mainDescriptionLabel: UILabel!
-    var uniLabel: UILabel!
+    var locationLabel: UILabel!
     
     var acceptButton: UIButton!
     var rejectButton: UIButton!
+    
+    var chatButton: UIButton!  // Adding the chat button
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,20 +48,20 @@ class PendingRequestCardView: UIView {
         addSubview(profileImageView)
         
         mainDescriptionLabel = UILabel()
-        mainDescriptionLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        mainDescriptionLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         mainDescriptionLabel.textColor = .black // Ensure text color is set to something visible
         mainDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainDescriptionLabel)
         
-        uniLabel = UILabel()
-        uniLabel.font = UIFont.systemFont(ofSize: 12)
-        uniLabel.textColor = .darkGray
-        uniLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(uniLabel)
+        locationLabel = UILabel()
+        locationLabel.font = UIFont.systemFont(ofSize: 14)
+        locationLabel.textColor = .darkGray
+        locationLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(locationLabel)
         
         acceptButton = UIButton(type: .system)
         acceptButton.setTitle("Accept", for: .normal)
-        acceptButton.backgroundColor = UIColor.systemBlue
+        acceptButton.backgroundColor = UIColor.systemGreen
         acceptButton.setTitleColor(.white, for: .normal)
         acceptButton.layer.cornerRadius = 10
         acceptButton.translatesAutoresizingMaskIntoConstraints = false
@@ -72,30 +75,57 @@ class PendingRequestCardView: UIView {
         rejectButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(rejectButton)
         
+        
+        chatButton = UIButton(type: .system)
+        let systemImage = UIImage(systemName: "message.fill")
+        chatButton.setImage(systemImage, for: .normal)
+        chatButton.tintColor = UIColor.systemBlue
+        chatButton.imageView?.contentMode = .scaleAspectFit
+        chatButton.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(chatButton)
+        
         setupConstraints()
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            // Profile Image View constraints
             profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalToConstant: 70),
             profileImageView.heightAnchor.constraint(equalToConstant: 70),
             
+            // Main Description Label constraints
             mainDescriptionLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
             mainDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            mainDescriptionLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -16),
-            mainDescriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: acceptButton.topAnchor, constant: -8), // Ensure label is above buttons
+            mainDescriptionLabel.trailingAnchor.constraint(lessThanOrEqualTo: chatButton.leadingAnchor, constant: -8), // Ensure spacing to chat button
+
             
-            acceptButton.leadingAnchor.constraint(equalTo: mainDescriptionLabel.leadingAnchor),
+            chatButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            chatButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            chatButton.widthAnchor.constraint(equalToConstant: 40),  // Adjust size as needed
+            chatButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            // Location Label constraints
+            locationLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            locationLabel.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 8),
+            locationLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -16),
+            
+            // Accept Button constraints
+            acceptButton.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            acceptButton.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 8),
             acceptButton.widthAnchor.constraint(equalToConstant: 80),
             acceptButton.heightAnchor.constraint(equalToConstant: 30),
-            acceptButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16), // Constrain to bottom
+            acceptButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -16),
             
-            rejectButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            // Reject Button constraints
+            rejectButton.leadingAnchor.constraint(equalTo: acceptButton.trailingAnchor, constant: 32),
+            rejectButton.bottomAnchor.constraint(equalTo: acceptButton.bottomAnchor),
             rejectButton.widthAnchor.constraint(equalToConstant: 80),
             rejectButton.heightAnchor.constraint(equalToConstant: 30),
-            rejectButton.bottomAnchor.constraint(equalTo: acceptButton.bottomAnchor), // Align bottom with accept button
         ])
     }
+    
+    
+    
 }

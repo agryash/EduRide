@@ -27,9 +27,12 @@ final class DatabaseManager{
             "numberOfSeats": trip.numberOfSeats,
             "startDate": trip.startDate,
             "startTime": trip.startTime,
-            "userEmail": trip.userEmail
+            "userEmail": trip.userEmail,
+            "passengers": trip.passengers,
+            "pendingRequests": trip.pendingRequests,
+            "rejectedRequests": trip.rejectedRequests
           ])
-          print("User created with ID: \(ref.documentID)")
+          print("Trip created with ID: \(ref.documentID)")
         }
     }
     
@@ -45,6 +48,7 @@ final class DatabaseManager{
                 }
                 
                 if let documents = querySnapshot?.documents {
+                    trips.removeAll()
                     for document in documents {
                         do {
                             let trip = try document.data(as: Trip.self)
@@ -67,13 +71,16 @@ final class DatabaseManager{
     }
     
     public func createRequest(with request: Request){
-        do {
-          let ref = db.collection("requests").addDocument(data: [
-            "tripId": request.tripId,
-            "user": request.user,
-            "status": request.status
-          ])
-          print("Request created with ID: \(ref.documentID)")
+        let db = Firestore.firestore()
+        let documentRef = db.collection("trips").document(request.tripId)
+            documentRef.updateData([
+                "pendingRequests": FieldValue.arrayUnion([request.user])
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+            }
         }
     }
 }

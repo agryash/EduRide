@@ -12,6 +12,9 @@ class MyTripsView: UIView {
     
     var pendingReqLabel: UILabel!
     let pendingReqDBValues: [String] = ["Yash A", "Riya B"]
+    let startDBValues: [String] = ["Boylston", "72 Westland"]
+    let endDBValues: [String] = ["Bracebridge", "Amazon"]
+
     var pendingReqCardViews: [PendingRequestCardView] = []
     
     var sentReqLabel: UILabel!
@@ -46,6 +49,11 @@ class MyTripsView: UIView {
             addSubview(pendingRequestCardView)
             
             pendingRequestCardView.mainDescriptionLabel.text = value
+            
+            let location = startDBValues[index] + " -> " + endDBValues[index]
+            
+            pendingRequestCardView.locationLabel.text = location
+
             
             pendingRequestCardView.acceptButton.tag = index
             pendingRequestCardView.rejectButton.tag = index

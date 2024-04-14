@@ -10,12 +10,8 @@ import UIKit
 class EditProfileView: UIView {
 
     var labelName: UILabel!
-    var labelEmail: UILabel!
-    var labelPassword: UILabel!
     var labelPhoneNumber: UILabel!
     var textFieldName: UITextField!
-    var textFieldEmail: UITextField!
-    var textFieldPassword: UITextField!
     var textFieldNumber: UITextField!
     var buttonSignUp: UIButton!
     var profileImage: UIImageView!
@@ -26,12 +22,8 @@ class EditProfileView: UIView {
         self.backgroundColor = .white
         
         setupLabelName()
-        setupLabelEmail()
-        setupLabelPassword()
         setupLabelPhoneNumber()
         setupTextFieldName()
-        setupTextFieldEmail()
-        setupTextFieldPassword()
         setupTextFieldNumber()
         setupButtonSignUp()
         setupImageView()
@@ -51,30 +43,15 @@ class EditProfileView: UIView {
         self.addSubview(labelName)
     }
     
-    func setupLabelEmail() {
-        labelEmail = UILabel()
-        labelEmail.text = "Email:"
-        labelEmail.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelEmail)
-    }
-    
-    func setupLabelPassword() {
-        labelPassword = UILabel()
-        labelPassword.text = "Phone Number:"
-        labelPassword.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelPassword)
-    }
-    
     func setupLabelPhoneNumber() {
         labelPhoneNumber = UILabel()
-        labelPhoneNumber.text = "Password:"
+        labelPhoneNumber.text = "Phone Number:"
         labelPhoneNumber.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(labelPhoneNumber)
     }
     
     func setupTextFieldName() {
         textFieldName = UITextField()
-        textFieldName.placeholder = "John Doe"
         textFieldName.translatesAutoresizingMaskIntoConstraints = false
         textFieldName.borderStyle = .roundedRect
         textFieldName.layer.borderWidth = 1.0
@@ -85,35 +62,8 @@ class EditProfileView: UIView {
         self.addSubview(textFieldName)
     }
     
-    func setupTextFieldEmail() {
-        textFieldEmail = UITextField()
-        textFieldEmail.placeholder = "johndoe@gmail.com"
-        textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
-        textFieldEmail.borderStyle = .roundedRect
-        textFieldEmail.layer.borderWidth = 1.0
-        textFieldEmail.layer.borderColor = UIColor.gray.cgColor
-        textFieldEmail.layer.cornerRadius = 10.0
-        textFieldEmail.layer.masksToBounds = true
-        textFieldEmail.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(textFieldEmail)
-    }
-    
-    func setupTextFieldPassword() {
-        textFieldPassword = UITextField()
-        textFieldPassword.placeholder = "******"
-        textFieldPassword.translatesAutoresizingMaskIntoConstraints = false
-        textFieldPassword.borderStyle = .roundedRect
-        textFieldPassword.layer.borderWidth = 1.0
-        textFieldPassword.layer.borderColor = UIColor.gray.cgColor
-        textFieldPassword.layer.cornerRadius = 10.0
-        textFieldPassword.layer.masksToBounds = true
-        textFieldPassword.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(textFieldPassword)
-    }
-    
     func setupTextFieldNumber() {
         textFieldNumber = UITextField()
-        textFieldNumber.placeholder = "1234567890"
         textFieldNumber.translatesAutoresizingMaskIntoConstraints = false
         textFieldNumber.borderStyle = .roundedRect
         textFieldNumber.layer.borderWidth = 1.0
@@ -141,7 +91,6 @@ class EditProfileView: UIView {
     
     func setupImageView() {
         profileImage = UIImageView()
-        profileImage.image = UIImage(systemName: "person.fill")
         profileImage.tintColor = .black
         profileImage.contentMode = .scaleToFill
         profileImage.clipsToBounds = true
@@ -178,26 +127,12 @@ class EditProfileView: UIView {
             choosePicButton.leadingAnchor.constraint(equalTo: textFieldName.trailingAnchor, constant: 16),
             choosePicButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            labelEmail.topAnchor.constraint(equalTo: textFieldName.bottomAnchor, constant: 16),
-            labelEmail.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            
-            textFieldEmail.topAnchor.constraint(equalTo: labelEmail.bottomAnchor, constant: 16),
-            textFieldEmail.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            textFieldEmail.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -140),
-
-            labelPassword.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 16),
-            labelPassword.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            
-            textFieldPassword.topAnchor.constraint(equalTo: labelPassword.bottomAnchor, constant: 16),
-            textFieldPassword.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            textFieldPassword.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-
-            labelPhoneNumber.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 16),
+            labelPhoneNumber.topAnchor.constraint(equalTo: textFieldName.bottomAnchor, constant: 16),
             labelPhoneNumber.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
             textFieldNumber.topAnchor.constraint(equalTo: labelPhoneNumber.bottomAnchor, constant: 16),
             textFieldNumber.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            textFieldNumber.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            textFieldNumber.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -140),
           
             buttonSignUp.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             buttonSignUp.topAnchor.constraint(equalTo: textFieldNumber.bottomAnchor, constant: 30),

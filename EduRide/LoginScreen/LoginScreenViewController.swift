@@ -24,7 +24,7 @@ class LoginScreenViewController: UIViewController {
     }
     
     @objc func onLoginButtonTapped() {
-        if let email = loginScreenView.emailText.text, !email.isEmpty,
+        if let email = loginScreenView.emailText.text?.lowercased(), !email.isEmpty,
            let password = loginScreenView.passwordText.text, !password.isEmpty {
             if (isValidEmail(email)) {
                 Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in

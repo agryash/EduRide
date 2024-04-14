@@ -7,11 +7,13 @@
 
 import UIKit
 import PhotosUI
+import FirebaseStorage
 
 class EditProfileViewController: UIViewController {
 
     let editProfileScreen = EditProfileView()
     var pickedImage: UIImage?
+    var currentUser = User()
     
     override func loadView() {
         view = editProfileScreen
@@ -21,9 +23,104 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Edit Profile"
         editProfileScreen.choosePicButton.menu = getMenuImagePicker()
+        setupDisplayValues()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        
+        editProfileScreen.buttonSignUp.addTarget(self, action: #selector(onButtonSaveTapped), for: .touchUpInside)
     }
     
-    func getMenuImagePicker() -> UIMenu{
+    @objc func hideKeyboardOnTap() {
+        view.endEditing(true)
+    }
+    
+    @objc func onButtonSaveTapped() {
+        let storage = Storage.storage().reference()
+        if let name = editProfileScreen.textFieldName.text, !name.isEmpty,
+           let phoneNumber = editProfileScreen.textFieldNumber.text, !phoneNumber.isEmpty {
+                if (isValidPhoneNumber(phoneNumber)) {
+                    if let profilePhoto = editProfileScreen.profileImage.image,
+                       let imageData = profilePhoto.jpegData(compressionQuality: 0.8) {
+                        let photoRef = storage.child("profile_photos/\(UUID().uuidString).jpg")
+
+                        photoRef.putData(imageData, metadata: nil) { (metadata, error) in
+                            if let _ = metadata {
+                                photoRef.downloadURL { (url, error) in
+                                    if let profilePhotoURL = url?.absoluteString {
+                                        let user = User(name: name, emailAddress: self.currentUser.emailAddress, password: self.currentUser.password, phoneNumber: phoneNumber, role: self.currentUser.role, photoUrl: profilePhotoURL)
+                                        DatabaseManager.shared.updateUser(user: user)
+                                    } else {
+                                        
+                                    }
+                                }
+                            } else {
+                                
+                            }
+                        }
+                    } else {
+                        let user = User(name: name, emailAddress: self.currentUser.emailAddress, password: self.currentUser.password, phoneNumber: phoneNumber, role: self.currentUser.role)
+                        DatabaseManager.shared.updateUser(user: user)
+                    }
+                } else {
+                    showInvalidErrorAlert(message: "Invalid Phone number")
+                }
+        } else {
+            showErrorAlert()
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
+        let numericRegex = "^[0-9+]{0,1}[0-9]{10}$"
+        let numericPredicate = NSPredicate(format: "SELF MATCHES %@", numericRegex)
+        return numericPredicate.evaluate(with: phoneNumber)
+    }
+    
+    func showErrorAlert() {
+        let alert = UIAlertController(
+            title: "Error!", message: "Text Fields must not be empty!",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
+
+    func showInvalidErrorAlert(message: String) {
+        let alert = UIAlertController(
+            title: "Error!", message: message,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
+
+    func setupDisplayValues() {
+        self.editProfileScreen.textFieldName.text = currentUser.name
+        self.editProfileScreen.textFieldNumber.text = currentUser.phoneNumber
+        if let profilePhotoURL = currentUser.photoUrl, let url = URL(string: profilePhotoURL) {
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let error = error {
+                    print("Error fetching photo from URL: \(error)")
+                    return
+                }
+                
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self.editProfileScreen.profileImage.image = image
+                    }
+                }
+            }
+            
+            task.resume()
+        } else {
+            self.editProfileScreen.profileImage.image = UIImage(systemName: "person.fill")
+        }
+    }
+    
+    func getMenuImagePicker() -> UIMenu {
         var menuItems = [
             UIAction(title: "Camera",handler: {(_) in
                 self.pickUsingCamera()

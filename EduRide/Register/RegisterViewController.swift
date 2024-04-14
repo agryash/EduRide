@@ -8,6 +8,8 @@
 import UIKit
 import PhotosUI
 import FirebaseAuth
+import Firebase
+import FirebaseStorage
 
 class RegisterViewController: UIViewController {
     
@@ -34,32 +36,60 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func onButtonRegisterTapped() {
+        let storage = Storage.storage().reference()
         if let name = registerScreen.textFieldName.text, !name.isEmpty,
            let email = registerScreen.textFieldEmail.text, !email.isEmpty,
-           let password = registerScreen.textFieldPassword.text, !password.isEmpty {
+           let password = registerScreen.textFieldPassword.text, !password.isEmpty,
+           let phoneNumber = registerScreen.textFieldNumber.text, !phoneNumber.isEmpty,
+           let role = registerScreen.textFieldRole.text, !role.isEmpty {
             if (isValidEmail(email)) {
-                Auth.auth().createUser(withEmail: email, password: password, completion: {result, error in
-                    if error == nil {
-                        print(email)
-                        print(password)
-                        self.setNameOfTheUserInFirebaseAuth(name: name)
-//                        let tabBar = TabBarController()
-//                        self.clearAddViewFields()
-//                        self.navigationController?.pushViewController(tabBar, animated: true)
-                        let tabBar = TabBarController()
-                        self.clearAddViewFields()
-                        tabBar.modalPresentationStyle = .fullScreen
-                        self.present(tabBar, animated: true)
+                if (isValidPhoneNumber(phoneNumber)) {
+                    if let profilePhoto = registerScreen.profileImage.image,
+                       let imageData = profilePhoto.jpegData(compressionQuality: 0.8) {
+                        let photoRef = storage.child("profile_photos/\(UUID().uuidString).jpg")
+
+                        photoRef.putData(imageData, metadata: nil) { (metadata, error) in
+                            if let _ = metadata {
+                                photoRef.downloadURL { (url, error) in
+                                    if let profilePhotoURL = url?.absoluteString {
+                                        let user = User(name: name, emailAddress: email.lowercased(), password: password, phoneNumber: phoneNumber, role: role, photoUrl: profilePhotoURL)
+                                        self.saveUserDataToFirestore(user: user)
+                                    } else {
+                                        
+                                    }
+                                }
+                            } else {
+                                
+                            }
+                        }
                     } else {
-                        self.showInvalidErrorAlert(message: error!.localizedDescription)
+                        let user = User(name: name, emailAddress: email, password: password, phoneNumber: phoneNumber, role: role)
+                        self.saveUserDataToFirestore(user: user)
                     }
-                })
+                } else {
+                    showInvalidErrorAlert(message: "Invalid Phone number")
+                }
             } else {
                 showInvalidErrorAlert(message: "Invalid Email id")
             }
         } else {
             showErrorAlert()
         }
+    }
+    
+    func saveUserDataToFirestore(user: User) {
+        Auth.auth().createUser(withEmail: user.emailAddress!, password: user.password!, completion: {result, error in
+            if error == nil {
+                self.setNameOfTheUserInFirebaseAuth(name: user.name!)
+                let tabBar = TabBarController()
+                self.clearAddViewFields()
+                DatabaseManager.shared.insertUser(with: user)
+                tabBar.modalPresentationStyle = .fullScreen
+                self.present(tabBar, animated: true)
+            } else {
+                self.showInvalidErrorAlert(message: error!.localizedDescription)
+            }
+        })
     }
     
     func setNameOfTheUserInFirebaseAuth(name: String) {
@@ -71,6 +101,12 @@ class RegisterViewController: UIViewController {
                 print("Error occured: \(String(describing: error))")
             }
         })
+    }
+    
+    func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
+        let numericRegex = "^[0-9+]{0,1}[0-9]{10}$"
+        let numericPredicate = NSPredicate(format: "SELF MATCHES %@", numericRegex)
+        return numericPredicate.evaluate(with: phoneNumber)
     }
 
     func isValidEmail(_ email: String) -> Bool {
@@ -171,4 +207,9 @@ extension RegisterViewController: UINavigationControllerDelegate, UIImagePickerC
             // Do your thing for No image loaded...
         }
     }
+}
+
+enum DatabaseError: Error {
+    case failedToConvertImageToData
+    case unknown
 }

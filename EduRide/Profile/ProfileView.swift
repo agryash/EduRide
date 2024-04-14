@@ -88,7 +88,6 @@ class ProfileView: UIView {
         
     func setupImageView() {
         profileImage = UIImageView()
-        profileImage.image = UIImage(systemName: "person.fill")
         profileImage.tintColor = .black
         profileImage.contentMode = .scaleToFill
         profileImage.clipsToBounds = true
@@ -99,7 +98,6 @@ class ProfileView: UIView {
     
     func setupLabelNameValue() {
         labelNameValue = UILabel()
-        labelNameValue.text = "John Doe"
         labelNameValue.translatesAutoresizingMaskIntoConstraints = false
         labelNameValue.textColor = UIColor.darkGray
         self.addSubview(labelNameValue)
@@ -107,7 +105,6 @@ class ProfileView: UIView {
     
     func setupLabelEmailValue() {
         labelEmailValue = UILabel()
-        labelEmailValue.text = "johndoe@gmail.com"
         labelEmailValue.translatesAutoresizingMaskIntoConstraints = false
         labelEmailValue.textColor = UIColor.darkGray
         self.addSubview(labelEmailValue)
@@ -115,7 +112,6 @@ class ProfileView: UIView {
     
     func setupLabelPasswordValue() {
         labelPasswordValue = UILabel()
-        labelPasswordValue.text = "******"
         labelPasswordValue.translatesAutoresizingMaskIntoConstraints = false
         labelPasswordValue.textColor = UIColor.darkGray
         self.addSubview(labelPasswordValue)
@@ -123,7 +119,6 @@ class ProfileView: UIView {
     
     func setupLabelPhoneNumberValue() {
         labelPhoneNumberValue = UILabel()
-        labelPhoneNumberValue.text = "1234567890"
         labelPhoneNumberValue.translatesAutoresizingMaskIntoConstraints = false
         labelPhoneNumberValue.textColor = UIColor.darkGray
         self.addSubview(labelPhoneNumberValue)
@@ -131,7 +126,6 @@ class ProfileView: UIView {
     
     func setupLabelRoleValue() {
         labelRoleValue = UILabel()
-        labelRoleValue.text = "Passenger"
         labelRoleValue.translatesAutoresizingMaskIntoConstraints = false
         labelRoleValue.textColor = UIColor.darkGray
         self.addSubview(labelRoleValue)

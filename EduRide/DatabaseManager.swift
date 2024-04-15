@@ -17,25 +17,25 @@ final class DatabaseManager{
     
     public func createTrip(with trip: Trip){
         do {
-          let ref = db.collection("trips").addDocument(data: [
-            "sourceName": trip.sourceName,
-            "destinationName": trip.destinationName,
-            "sourceLongitude": trip.sourceLongitude,
-            "sourceLatitude": trip.sourceLatitude,
-            "destinationLongitude": trip.destinationLongitude,
-            "destinationLatitude": trip.destinationLatitude,
-            "pricePerSeat": trip.pricePerSeat,
-            "numberOfSeats": trip.numberOfSeats,
-            "startDate": trip.startDate,
-            "startTime": trip.startTime,
-            "userEmail": trip.userEmail
-          ])
-//          print("User created with ID: \(ref.documentID)")
+            let ref = db.collection("trips").addDocument(data: [
+                "sourceName": trip.sourceName,
+                "destinationName": trip.destinationName,
+                "sourceLongitude": trip.sourceLongitude,
+                "sourceLatitude": trip.sourceLatitude,
+                "destinationLongitude": trip.destinationLongitude,
+                "destinationLatitude": trip.destinationLatitude,
+                "pricePerSeat": trip.pricePerSeat,
+                "numberOfSeats": trip.numberOfSeats,
+                "startDate": trip.startDate,
+                "startTime": trip.startTime,
+                "userEmail": trip.userEmail
+            ])
+            //          print("User created with ID: \(ref.documentID)")
         }
     }
     
     func findTripsBy(with startDate: String, completion: @escaping (Result<Array<Trip>, Error>) -> Void) {
-//        print("finding trips \(startDate)")
+        //        print("finding trips \(startDate)")
         var trips = [Trip]()
         
         self.db.collection("trips")
@@ -51,7 +51,7 @@ final class DatabaseManager{
                             let trip = try document.data(as: Trip.self)
                             trip.id = document.documentID
                             if trip.startDate == startDate && trip.numberOfSeats > 0 {
-//                                print(trip.sourceName)
+                                //                                print(trip.sourceName)
                                 trips.append(trip)
                             }
                             
@@ -59,7 +59,7 @@ final class DatabaseManager{
                             print(error)
                         }
                     }
-
+                    
                     completion(.success(trips))
                 } else {
                     completion(.success(trips))
@@ -69,19 +69,18 @@ final class DatabaseManager{
     
     public func createRequest(with request: Request) {
         do {
-          let ref = db.collection("requests").addDocument(data: [
-            "tripId": request.tripId,
-            "user": request.user,
-            "status": request.status
-          ])
-//          print("Request created with ID: \(ref.documentID)")
+            let ref = db.collection("requests").addDocument(data: [
+                "tripId": request.tripId,
+                "user": request.user,
+                "status": request.status
+            ])
+            //          print("Request created with ID: \(ref.documentID)")
         }
     }
     
-    public func findTripsForUser(with userEmail: String, completion: @escaping (Result<Array<Trip>, Error>) -> Void) {
-        print("findTripsForUSer")
-        print("finding trips for user \(userEmail)")
+    public func findTripsForUser(with userEmail: String, completion: @escaping (Result<[String], Error>) -> Void) {
         var trips = [Trip]()
+        var passengers = [String]()
         
         self.db.collection("trips")
             .addSnapshotListener(includeMetadataChanges: false) { querySnapshot, error in
@@ -95,31 +94,119 @@ final class DatabaseManager{
                             let trip = try document.data(as: Trip.self)
                             trip.id = document.documentID
                             if trip.userEmail == userEmail {
-                                print(trip.id)
-                                print(trip.sourceName)
+                                //                                print(userEmail)
                                 trips.append(trip)
                             }
                         } catch {
                             print(error)
                         }
                     }
-                    completion(.success(trips))
+                    for trip in trips {
+                        self.findRequestForTripId(with: trip.id!) { result in
+                            switch result {
+                            case .success(let requests):
+                                //                                print("Requests for trip \(trip.id!):")
+                                
+                                for request in requests {
+                                    print("User is \(request.user):")
+                                    passengers.append(request.user)
+                                }
+                                //                                    self.findUserFromEmail(with: request.user) { userResult in
+                                //                                        switch userResult {
+                                //                                        case .success(let user):
+                                //                                            if let user = user {
+                                ////                                                print(user.emailAddress)
+                                //                                                passengers.append(user)
+                                //                                            } else {
+                                //                                                print("User not found for email \(request.user)")
+                                //                                            }
+                                //                                        case .failure(let error):
+                                //                                            print("Error occurred while finding user for email \(request.user):", error)
+                                //                                        }
+                                
+                                completion(.success(passengers))
+                                
+                                
+                            case .failure(let error):
+                                print("Error occurred while finding requests for trip \(trip.id!):", error)
+                                completion(.success(passengers))
+                            }
+                        }
+                    }
                 } else {
-                    completion(.success(trips))
+                    // No trips found, call completion with empty users array
+                    completion(.success(passengers))
                 }
             }
+    }
         
+
+    
+    public func findRequestForTripId(with tripId: String, completion: @escaping (Result<Array<Request>, Error>) -> Void) {
+//        print("----------------------------------------")
+        var requests = [Request]()
+        
+        self.db.collection("requests")
+            .addSnapshotListener(includeMetadataChanges: false) { querySnapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                if let documents = querySnapshot?.documents {
+                    for document in documents {
+                        do {
+                            let request = try document.data(as: Request.self)
+                            if request.tripId == tripId {
+                                requests.append(request)
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    completion(.success(requests))
+                } else {
+                    completion(.success(requests))
+                }
+            }
+    }
+    
+//    public func findUserFromEmail(with email: String, completion: @escaping (Result<User?, Error>) -> Void) {
+//        var foundUser: User? = nil
+//        
+//        self.db.collection("users").whereField("email", isEqualTo: email)
+//            .getDocuments { querySnapshot, error in
+//                if let error = error {
+//                    completion(.failure(error))
+//                    return
+//                }
+//                
+//                if let documents = querySnapshot?.documents {
+//                    for document in documents {
+//                        do {
+//                            let user = try document.data(as: User.self)
+//                            foundUser = user
+//                            break // Found the user, no need to continue searching
+//                        } catch {
+//                            print(error)
+//                        }
+//                    }
+//                }
+//                
+//                completion(.success(foundUser))
+//            }
+//    }
+
     public func insertUser(with user: User) {
         do {
-          let ref = db.collection("users").addDocument(data: [
-            "name": user.name!,
-            "email": user.emailAddress!,
-            "phone": user.phoneNumber!,
-            "role": user.role!,
-            "photoUrl": user.photoUrl!,
-            "password": user.password!
-          ])
-          print("User created with ID: \(ref.documentID)")
+            let ref = db.collection("users").addDocument(data: [
+                "name": user.name!,
+                "email": user.emailAddress!,
+                "phone": user.phoneNumber!,
+                "role": user.role!,
+                "photoUrl": user.photoUrl!,
+                "password": user.password!
+            ])
+            print("User created with ID: \(ref.documentID)")
         }
     }
     
@@ -129,12 +216,12 @@ final class DatabaseManager{
                 print("Error getting user document: \(error.localizedDescription)")
                 return
             }
-
+            
             guard let documents = querySnapshot?.documents, !documents.isEmpty else {
                 print("No matching user document found")
                 return
             }
-
+            
             guard let userDoc = documents.first else {
                 print("Error: User document is nil")
                 return
@@ -145,9 +232,9 @@ final class DatabaseManager{
                 "phone": user.phoneNumber!,
                 "photoUrl": user.photoUrl!
             ]
-
+            
             let userRef = db.collection("users").document(userDoc.documentID)
-
+            
             userRef.updateData(userData) { error in
                 if let error = error {
                     print("Error updating user data: \(error.localizedDescription)")
@@ -170,7 +257,7 @@ final class DatabaseManager{
             userRef.addSnapshotListener { (documentSnapshot, error) in
                 
                 let document = documentSnapshot!.documents[0]
-
+                
                 let userData = document.data()
                 let name = userData["name"] as? String
                 let password = userData["password"] as? String
@@ -186,28 +273,31 @@ final class DatabaseManager{
     }
     
     public func getTripDetails(tripID: String, completion: @escaping (Result<User?, Error>) -> Void) {
-//        let tripRef = db.collection("trips").document(tripID)
-//            
-//        tripRef.getDocument { (documentSnapshot, error) in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//            
-//            guard let document = documentSnapshot, document.exists else {
-//                completion(.success(nil))
-//                return
-//            }
-//            
-//            let tripData = document.data()
-//            let name = tripData?["name"] as? String
-//            let description = tripData?["description"] as? String
-//            
-//            let trip = Trip(name: name, description: description)
-//            completion(.success(trip))
-//        }
+        //        let tripRef = db.collection("trips").document(tripID)
+        //
+        //        tripRef.getDocument { (documentSnapshot, error) in
+        //            if let error = error {
+        //                completion(.failure(error))
+        //                return
+        //            }
+        //
+        //            guard let document = documentSnapshot, document.exists else {
+        //                completion(.success(nil))
+        //                return
+        //            }
+        //
+        //            let tripData = document.data()
+        //            let name = tripData?["name"] as? String
+        //            let description = tripData?["description"] as? String
+        //
+        //            let trip = Trip(name: name, description: description)
+        //            completion(.success(trip))
+        //        }
     }
+    
+    
 }
+
 
 
 

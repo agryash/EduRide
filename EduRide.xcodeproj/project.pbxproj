@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38281F0A2BCCC952008F5E0B /* UpcomingTripsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38281F092BCCC952008F5E0B /* UpcomingTripsCardView.swift */; };
 		382F27162BBC9A9500DB7315 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F27152BBC9A9500DB7315 /* MainScreenView.swift */; };
 		382F27192BBC9BA400DB7315 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F27182BBC9BA400DB7315 /* LoginScreenView.swift */; };
 		382F271B2BBC9BB300DB7315 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F271A2BBC9BB300DB7315 /* LoginScreenViewController.swift */; };
@@ -85,6 +86,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38281F092BCCC952008F5E0B /* UpcomingTripsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsCardView.swift; sourceTree = "<group>"; };
 		382F27152BBC9A9500DB7315 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		382F27182BBC9BA400DB7315 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		382F271A2BBC9BB300DB7315 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				767E71372BC0A78700B96A7A /* MyTripsView.swift */,
 				767E713B2BC0A7C500B96A7A /* PendingRequestCardView.swift */,
 				767E713D2BC0A7D200B96A7A /* SentRequestCardView.swift */,
+				38281F092BCCC952008F5E0B /* UpcomingTripsCardView.swift */,
 			);
 			path = MyTrips;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				767E71522BC0A97800B96A7A /* MapLocation.swift in Sources */,
 				767E71362BC0A77200B96A7A /* MyTripsViewController.swift in Sources */,
 				FCB8C4DD2BC4CAD6007FE672 /* SingleChatTableViewCell.swift in Sources */,
+				38281F0A2BCCC952008F5E0B /* UpcomingTripsCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

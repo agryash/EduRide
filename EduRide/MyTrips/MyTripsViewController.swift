@@ -22,6 +22,7 @@ class MyTripsViewController: UIViewController {
         for (index, cardView) in myTripsView.pendingReqCardViews.enumerated() {
             cardView.acceptButton.tag = index
             cardView.rejectButton.tag = index
+            cardView.chatButton.tag = index
             
             cardView.acceptButton.addTarget(self, action: #selector(acceptButtonTapped(_:)), for: .touchUpInside)
             cardView.rejectButton.addTarget(self, action: #selector(rejectButtonTapped(_:)), for: .touchUpInside)

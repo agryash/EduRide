@@ -22,9 +22,6 @@ class FindTripView: UIView {
         setupTripDateLabel()
         setupDatePicker()
         setupTripsLabel()
-//        setupTripsCardView()
-//        setupTableViewTrips()
-        
         initConstraints()
     }
     
@@ -51,7 +48,10 @@ class FindTripView: UIView {
     }
     
     func setupTripsCardView(trips: [Trip]) {
-        print("in find trips view \(trips)")
+        for cardView in coPassCardViews {
+            cardView.removeFromSuperview()
+        }
+        coPassCardViews.removeAll()
         for (index, trip) in trips.enumerated() {
             let coPassCardView = TripCardView()
             coPassCardView.translatesAutoresizingMaskIntoConstraints = false
@@ -79,12 +79,6 @@ class FindTripView: UIView {
             previousCardView = cardView
         }
     }
-//    func setupTableViewTrips() {
-//        tableViewTrips = UITableView()
-//        tableViewTrips.register(TripTableViewCell.self, forCellReuseIdentifier: "Trips")
-//        tableViewTrips.translatesAutoresizingMaskIntoConstraints = false
-//        self.addSubview(tableViewTrips)
-//    }
     
     func initConstraints(){
         NSLayoutConstraint.activate([
@@ -96,11 +90,6 @@ class FindTripView: UIView {
             
             tripsLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
             tripsLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            
-//            tableViewTrips.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 16),
-//            tableViewTrips.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-//            tableViewTrips.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
-//            tableViewTrips.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -24),
         ])
     }
     

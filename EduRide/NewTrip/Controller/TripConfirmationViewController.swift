@@ -49,6 +49,10 @@ class TripConfirmationViewController: UIViewController {
             
             if let seats = Int (seatsText),
                let price = Double (priceText) {
+                let passengers = [String]()
+                let pendingRequests = [String]()
+                let rejectedRequests = [String]()
+                
                 let trip = Trip(sourceName: sourceName,
                                 destinationName: destinationName,
                                 sourceLatitude: sourceCoordinates.latitude,
@@ -59,8 +63,11 @@ class TripConfirmationViewController: UIViewController {
                                 numberOfSeats: seats,
                                 pricePerSeat: price,
                                 startDate: startDateText,
-                                startTime: startTimeText)
-                print("herererere")
+                                startTime: startTimeText,
+                                passengers: passengers,
+                                pendingRequests: pendingRequests,
+                                rejectedRequests: rejectedRequests
+                            )
                 DatabaseManager.shared.createTrip(with: trip)
             }
         }

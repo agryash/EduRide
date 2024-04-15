@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 final class DatabaseManager{
     
@@ -82,6 +83,105 @@ final class DatabaseManager{
                     print("Document successfully updated")
             }
         }
+    }
+    
+    public func insertUser(with user: User) {
+        do {
+          let ref = db.collection("users").addDocument(data: [
+            "name": user.name!,
+            "email": user.emailAddress!,
+            "phone": user.phoneNumber!,
+            "role": user.role!,
+            "photoUrl": user.photoUrl!,
+            "password": user.password!
+          ])
+          print("User created with ID: \(ref.documentID)")
+        }
+    }
+    
+    public func updateUser(user: User) {
+        db.collection("users").whereField("email", isEqualTo: user.emailAddress).getDocuments { [self] (querySnapshot, error) in
+            if let error = error {
+                print("Error getting user document: \(error.localizedDescription)")
+                return
+            }
+
+            guard let documents = querySnapshot?.documents, !documents.isEmpty else {
+                print("No matching user document found")
+                return
+            }
+
+            guard let userDoc = documents.first else {
+                print("Error: User document is nil")
+                return
+            }
+            
+            let userData: [String: Any] = [
+                "name": user.name!,
+                "phone": user.phoneNumber!,
+                "photoUrl": user.photoUrl!
+            ]
+
+            let userRef = db.collection("users").document(userDoc.documentID)
+
+            userRef.updateData(userData) { error in
+                if let error = error {
+                    print("Error updating user data: \(error.localizedDescription)")
+                } else {
+                    print("User data updated successfully")
+                }
+            }
+        }
+    }
+    
+    public func getCurrentUserDetails(completion: @escaping (Result<User?, Error>) -> Void) {
+        if let currentUser = Auth.auth().currentUser {
+            let uid = currentUser.uid
+            let email = currentUser.email
+            let displayName = currentUser.displayName
+            print(email!)
+            print(uid)
+            let userRef = db.collection("users").whereField("email", isEqualTo: email!)
+            
+            userRef.addSnapshotListener { (documentSnapshot, error) in
+                
+                let document = documentSnapshot!.documents[0]
+
+                let userData = document.data()
+                let name = userData["name"] as? String
+                let password = userData["password"] as? String
+                let phoneNumber = userData["phone"] as? String
+                let role = userData["role"] as? String
+                let photoUrl = userData["photoUrl"] as? String
+                
+                let user = User(name: name!, emailAddress: email!, password: password!, phoneNumber: phoneNumber!, role: role!, photoUrl: photoUrl)
+                completion(.success(user))
+            }
+        } else {
+        }
+    }
+    
+    public func getTripDetails(tripID: String, completion: @escaping (Result<User?, Error>) -> Void) {
+//        let tripRef = db.collection("trips").document(tripID)
+//            
+//        tripRef.getDocument { (documentSnapshot, error) in
+//            if let error = error {
+//                completion(.failure(error))
+//                return
+//            }
+//            
+//            guard let document = documentSnapshot, document.exists else {
+//                completion(.success(nil))
+//                return
+//            }
+//            
+//            let tripData = document.data()
+//            let name = tripData?["name"] as? String
+//            let description = tripData?["description"] as? String
+//            
+//            let trip = Trip(name: name, description: description)
+//            completion(.success(trip))
+//        }
     }
 }
 

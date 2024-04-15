@@ -9,8 +9,10 @@ import UIKit
 import MapKit
 
 class TripDetailsViewController: UIViewController {
+    
     let tripDetails = TripDetailsView()
     var tripId: String?
+    var trip = [Trip]()
     
     override func loadView() {
         view = tripDetails
@@ -26,8 +28,12 @@ class TripDetailsViewController: UIViewController {
             cardView.acceptButton.addTarget(self, action: #selector(acceptButtonTapped(_:)), for: .touchUpInside)
             cardView.rejectButton.addTarget(self, action: #selector(rejectButtonTapped(_:)), for: .touchUpInside)
         }
-        
+        loadTrip()
         setupMapView()
+    }
+    
+    func loadTrip() {
+        
     }
     
     func setupMapView() {

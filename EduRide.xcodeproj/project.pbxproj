@@ -14,6 +14,7 @@
 		708A52272BC5A857004DC3BF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 708A52262BC5A857004DC3BF /* FirebaseFirestore */; };
 		708A52292BC5A857004DC3BF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 708A52282BC5A857004DC3BF /* FirebaseFirestoreSwift */; };
 		708A522B2BC5A857004DC3BF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 708A522A2BC5A857004DC3BF /* FirebaseStorage */; };
+		70CA84062BCAFFCB003A6AA7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CA84052BCAFFCB003A6AA7 /* User.swift */; };
 		767E71312BC0A5A800B96A7A /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71302BC0A5A800B96A7A /* RegisterView.swift */; };
 		767E71332BC0A5B800B96A7A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71322BC0A5B800B96A7A /* RegisterViewController.swift */; };
 		767E71362BC0A77200B96A7A /* MyTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71352BC0A77200B96A7A /* MyTripsViewController.swift */; };
@@ -87,6 +88,7 @@
 		382F27152BBC9A9500DB7315 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		382F27182BBC9BA400DB7315 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		382F271A2BBC9BB300DB7315 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
+		70CA84052BCAFFCB003A6AA7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		767E71302BC0A5A800B96A7A /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		767E71322BC0A5B800B96A7A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		767E71352BC0A77200B96A7A /* MyTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,14 @@
 				382F27182BBC9BA400DB7315 /* LoginScreenView.swift */,
 			);
 			path = LoginScreen;
+			sourceTree = "<group>";
+		};
+		70CA84042BCAFFB6003A6AA7 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				70CA84052BCAFFCB003A6AA7 /* User.swift */,
+			);
+			path = "Data Models";
 			sourceTree = "<group>";
 		};
 		767E712F2BC0A59100B96A7A /* Register */ = {
@@ -309,6 +319,7 @@
 		FC840C2E2B92B72200EC7B38 /* EduRide */ = {
 			isa = PBXGroup;
 			children = (
+				70CA84042BCAFFB6003A6AA7 /* Data Models */,
 				76CBA4BF2BC8B18600DCC245 /* DatabaseManager.swift */,
 				767E716E2BC0AC1E00B96A7A /* TripDetails */,
 				767E71652BC0AB4A00B96A7A /* Profile */,
@@ -514,6 +525,7 @@
 			files = (
 				767E71502BC0A96600B96A7A /* Trip.swift in Sources */,
 				767E71312BC0A5A800B96A7A /* RegisterView.swift in Sources */,
+				70CA84062BCAFFCB003A6AA7 /* User.swift in Sources */,
 				767E71602BC0AAA500B96A7A /* LocationManager.swift in Sources */,
 				767E71382BC0A78700B96A7A /* MyTripsView.swift in Sources */,
 				382F271B2BBC9BB300DB7315 /* LoginScreenViewController.swift in Sources */,

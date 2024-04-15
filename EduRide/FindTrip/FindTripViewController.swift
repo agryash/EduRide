@@ -11,6 +11,7 @@ import FirebaseAuth
 class FindTripViewController: UIViewController {
     let findTripsScreen = FindTripView()
     var trips = [Trip]()
+    var passengers = [String]()
     var handleAuth: AuthStateDidChangeListenerHandle?
     var currEmail = ""
     
@@ -52,6 +53,20 @@ class FindTripViewController: UIViewController {
                 print("Failed to get users: \(error)")
             }
         })
+        
+        DatabaseManager.shared.findTripsForUser(with: "adriver@gmail.com") { [weak self]  result in
+            switch result {
+            case .success(let passengers):
+                self?.passengers = passengers
+
+                for passenger in passengers {
+                    print("###Requester is \(passenger):")
+                }
+            case .failure(let error):
+                print("Error occurred:", error)
+            }
+        }
+                                    
     }
     
     func cardViewReload() {

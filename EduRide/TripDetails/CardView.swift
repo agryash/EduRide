@@ -40,14 +40,9 @@ class CardView: UIView {
         addSubview(mainDescriptionLabel)
         
         acceptButton = UIButton(type: .system)
-        acceptButton.setTitle("Profile", for: .normal)
+        acceptButton.setTitle("Message", for: .normal)
         acceptButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(acceptButton)
-        
-        rejectButton = UIButton(type: .system)
-        rejectButton.setTitle("Message", for: .normal)
-        rejectButton.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(rejectButton)
         
         NSLayoutConstraint.activate([
             
@@ -65,11 +60,6 @@ class CardView: UIView {
             acceptButton.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 16),
             acceptButton.widthAnchor.constraint(equalToConstant: 100),
             acceptButton.heightAnchor.constraint(equalToConstant: 40),
-        
-            rejectButton.leadingAnchor.constraint(equalTo: acceptButton.trailingAnchor, constant: 30),
-            rejectButton.topAnchor.constraint(equalTo: acceptButton.topAnchor),
-            rejectButton.bottomAnchor.constraint(equalTo: acceptButton.bottomAnchor),
-            rejectButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             widthAnchor.constraint(equalToConstant: 300)
         ])

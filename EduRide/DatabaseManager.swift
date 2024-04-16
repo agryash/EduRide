@@ -192,6 +192,38 @@ final class DatabaseManager{
         }
     }
     
+    public func getTripDetails(tripID: String, completion: @escaping (Result<Trip?, Error>) -> Void) {
+        let tripRef = db.collection("trips").document(tripID)
+            
+        tripRef.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists else {
+                completion(.success(nil))
+                return
+            }
+            
+            let tripData = document.data()
+            let sourceName = tripData?["sourceName"] as? String
+            let destinationName = tripData?["destinationName"] as? String
+            let sourceLatitude = tripData?["sourceLatitude"] as? Double
+            let sourceLongitude = tripData?["sourceLongitude"] as? Double
+            let destinationLatitude = tripData?["destinationLatitude"] as? Double
+            let destinationLongitude = tripData?["destinationLongitude"] as? Double
+            let userEmail = tripData?["userEmail"] as? String
+            let numberOfSeats = tripData?["numberOfSeats"] as? Int
+            let pricePerSeat = tripData?["pricePerSeat"] as? Double
+            let startDate = tripData?["startDate"] as? String
+            let startTime = tripData?["startTime"] as? String
+
+            let trip = Trip(id: tripID, sourceName: sourceName!, destinationName: destinationName!, sourceLatitude: sourceLatitude!, sourceLongitude: sourceLongitude!, destinationLatitude: destinationLatitude!, destinationLongitude: destinationLongitude!, userEmail: userEmail!, numberOfSeats: numberOfSeats!, pricePerSeat: pricePerSeat!, startDate: startDate!, startTime: startTime!)
+            completion(.success(trip))
+        }
+    }
+      
     public func getUserDetailsByEmail(with email:String, completion: @escaping (Result<User?, Error>) -> Void) {
         let userRef = db.collection("users").whereField("email", isEqualTo: email)
         userRef.addSnapshotListener { (documentSnapshot, error) in

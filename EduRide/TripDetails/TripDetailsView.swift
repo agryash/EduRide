@@ -15,12 +15,15 @@ class TripDetailsView: UIView {
     var labelDriver: UILabel!
     var labelCoPassengers: UILabel!
     var driverCardView = CardView()
-    var mapView:MKMapView!
+    var mapView: MKMapView!
+    var contentWrapper: UIScrollView!
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
         
+        setupContentWrapper()
         setupLabelDriver()
         setupLabelCoPassengers()
         setupDriverCardView()
@@ -33,27 +36,31 @@ class TripDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupContentWrapper() {
+        contentWrapper = UIScrollView()
+        contentWrapper.alwaysBounceVertical = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
+    }
+    
     func setupDriverCardView() {
         driverCardView = CardView()
         driverCardView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(driverCardView)
-        driverCardView.mainDescriptionLabel.text = "John Doe"
+        contentWrapper.addSubview(driverCardView)
     }
     
     func setupCoPassengerCardView() {
         for (index, value) in self.databaseValues.enumerated() {
             let coPassCardView = CardView()
             coPassCardView.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(coPassCardView)
+            contentWrapper.addSubview(coPassCardView)
             
             coPassCardView.mainDescriptionLabel.text = value
             
             coPassCardView.acceptButton.tag = index
-            coPassCardView.rejectButton.tag = index
                     
             coPassCardViews.append(coPassCardView)
         }
-        layoutCardViews()
     }
     
     func setupLabelDriver() {
@@ -61,7 +68,7 @@ class TripDetailsView: UIView {
         labelDriver.text = "Driver"
         labelDriver.font = UIFont.boldSystemFont(ofSize: 16)
         labelDriver.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelDriver)
+        contentWrapper.addSubview(labelDriver)
     }
     
     func setupLabelCoPassengers() {
@@ -69,48 +76,54 @@ class TripDetailsView: UIView {
         labelCoPassengers.text = "Co-Passengers"
         labelCoPassengers.font = UIFont.boldSystemFont(ofSize: 16)
         labelCoPassengers.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelCoPassengers)
+        contentWrapper.addSubview(labelCoPassengers)
     }
-    
-    func layoutCardViews() {
-        var previousCardView: UIView?
-        for cardView in coPassCardViews {
-            NSLayoutConstraint.activate([
-                cardView.topAnchor.constraint(equalTo: previousCardView?.bottomAnchor ?? labelCoPassengers.bottomAnchor, constant: 16),
-                cardView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-                cardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
-            ])
-            
-            previousCardView = cardView
-        }
-    }
-    
+      
     func setupMapview() {
         mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.layer.cornerRadius = 10
-        self.addSubview(mapView)
+        contentWrapper.addSubview(mapView)
     }
     
     func initConstraints() {
-            NSLayoutConstraint.activate([
-                mapView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
-                mapView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                mapView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-                mapView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
-                
-                labelDriver.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 30),
-                labelDriver.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        NSLayoutConstraint.activate([
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
+            mapView.topAnchor.constraint(equalTo: contentWrapper.topAnchor, constant: 8),
+            mapView.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 16),
+            mapView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            mapView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
+            
+            labelDriver.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 30),
+            labelDriver.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 16),
 
-                driverCardView.topAnchor.constraint(equalTo: labelDriver.bottomAnchor, constant: 16),
-                driverCardView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                driverCardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-                
-                labelCoPassengers.topAnchor.constraint(equalTo: driverCardView.bottomAnchor, constant: 20),
-                labelCoPassengers.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                
-                
+            driverCardView.topAnchor.constraint(equalTo: labelDriver.bottomAnchor, constant: 16),
+            driverCardView.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 16),
+            driverCardView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            
+            labelCoPassengers.topAnchor.constraint(equalTo: driverCardView.bottomAnchor, constant: 20),
+            labelCoPassengers.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 16),
+        ])
+        
+        var previousCardView: UIView = labelCoPassengers
+        for cardView in coPassCardViews {
+            NSLayoutConstraint.activate([
+                cardView.topAnchor.constraint(equalTo: previousCardView.bottomAnchor, constant: 16),
+                cardView.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 16),
+                cardView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             ])
+            previousCardView = cardView
+        }
+        
+        if let lastCardView = coPassCardViews.last {
+            NSLayoutConstraint.activate([
+                lastCardView.bottomAnchor.constraint(equalTo: contentWrapper.bottomAnchor, constant: -16)
+            ])
+        }
     }
 }
 

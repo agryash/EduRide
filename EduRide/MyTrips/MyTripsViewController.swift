@@ -22,9 +22,11 @@ class MyTripsViewController: UIViewController {
         for (index, cardView) in myTripsView.pendingReqCardViews.enumerated() {
             cardView.acceptButton.tag = index
             cardView.rejectButton.tag = index
+            cardView.chatButton.tag = index
             
             cardView.acceptButton.addTarget(self, action: #selector(acceptButtonTapped(_:)), for: .touchUpInside)
             cardView.rejectButton.addTarget(self, action: #selector(rejectButtonTapped(_:)), for: .touchUpInside)
+            cardView.chatButton.addTarget(self, action: #selector(chatButtonTapped(_:)), for: .touchUpInside)
         }
 
     }
@@ -44,6 +46,15 @@ class MyTripsViewController: UIViewController {
         
         print("Reject button tapped for co-passenger: \(title ?? "Unknown")")
     }
+    
+    @objc func chatButtonTapped(_ sender: UIButton) {
+        let index = sender.tag
+        let cardView = myTripsView.pendingReqCardViews[index]
+        let title = cardView.mainDescriptionLabel.text
+        
+        print("Chat button tapped for co-passenger: \(title ?? "Unknown")")
+    }
+    
     
 
 

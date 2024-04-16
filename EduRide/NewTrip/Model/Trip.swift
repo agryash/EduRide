@@ -20,8 +20,11 @@ class Trip: Decodable {
     var pricePerSeat: Double
     var startDate: String
     var startTime: String
-
-    init(id: String? = nil, sourceName: String, destinationName: String, sourceLatitude: Double, sourceLongitude: Double, destinationLatitude: Double,  destinationLongitude: Double, userEmail: String, numberOfSeats: Int, pricePerSeat: Double, startDate: String, startTime: String) {
+    var passengers: [String]
+    var pendingRequests: [String]
+    var rejectedRequests: [String]
+    
+    init(id: String? = nil, sourceName: String, destinationName: String, sourceLatitude: Double, sourceLongitude: Double, destinationLatitude: Double,  destinationLongitude: Double, userEmail: String, numberOfSeats: Int, pricePerSeat: Double, startDate: String, startTime: String, passengers: [String], pendingRequests: [String], rejectedRequests: [String]) {
         self.id = id
         self.sourceName = sourceName
         self.destinationName = destinationName
@@ -34,5 +37,8 @@ class Trip: Decodable {
         self.pricePerSeat = pricePerSeat
         self.startDate = startDate
         self.startTime = startTime
+        self.passengers = passengers
+        self.pendingRequests = pendingRequests
+        self.rejectedRequests = rejectedRequests
     }
 }

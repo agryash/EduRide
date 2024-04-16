@@ -11,6 +11,7 @@ import FirebaseAuth
 class FindTripViewController: UIViewController {
     let findTripsScreen = FindTripView()
     var trips = [Trip]()
+    var passengers = [String]()
     var handleAuth: AuthStateDidChangeListenerHandle?
     var currEmail = ""
     
@@ -22,6 +23,7 @@ class FindTripViewController: UIViewController {
         super.viewDidLoad()
         title = "Find Trips"
         findTripsScreen.datePicker.addTarget(self, action: #selector(onDateChange), for: .valueChanged)
+        trips.removeAll()
         loadTripsOnDate(tripDate: Date())
         
         handleAuth = Auth.auth().addStateDidChangeListener{auth, user in
@@ -37,19 +39,34 @@ class FindTripViewController: UIViewController {
 
     
     func loadTripsOnDate(tripDate: Date) {
+        self.trips.removeAll()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         var date = formatter.string(from: tripDate)
-
         DatabaseManager.shared.findTripsBy(with: date, completion: { [weak self] result in
             switch result {
             case .success(let trips):
+                
                 self?.trips = trips
                 self?.cardViewReload()
             case .failure(let error):
                 print("Failed to get users: \(error)")
             }
         })
+        
+        DatabaseManager.shared.findTripsForUser(with: "adriver@gmail.com") { [weak self]  result in
+            switch result {
+            case .success(let passengers):
+                self?.passengers = passengers
+
+                for passenger in passengers {
+                    print("###Requester is \(passenger):")
+                }
+            case .failure(let error):
+                print("Error occurred:", error)
+            }
+        }
+                                    
     }
     
     func cardViewReload() {

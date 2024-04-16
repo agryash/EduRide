@@ -67,7 +67,7 @@ class UpcomingTripsCardView: UIView {
             // Main Description Label constraints
             dateLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
             dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: chatButton.leadingAnchor, constant: -8), // Ensure spacing to chat button
+//            dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: chatButton.leadingAnchor, constant: -8), // Ensure spacing to chat button
 
             // Location Label constraints
             locationLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),

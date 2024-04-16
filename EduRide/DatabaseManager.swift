@@ -170,8 +170,6 @@ final class DatabaseManager{
             let uid = currentUser.uid
             let email = currentUser.email
             let displayName = currentUser.displayName
-            print(email!)
-            print(uid)
             let userRef = db.collection("users").whereField("email", isEqualTo: email!)
             
             userRef.addSnapshotListener { (documentSnapshot, error) in
@@ -189,6 +187,50 @@ final class DatabaseManager{
                 completion(.success(user))
             }
         } else {
+        }
+    }
+    
+    public func getUserDetailsFromEmails(for emailAddresses: [String], completion: @escaping (Result<[User], Error>) -> Void) {
+        let userRef = db.collection("users")
+        var users: [User] = []
+        
+        let dispatchGroup = DispatchGroup()
+        
+        for email in emailAddresses {
+            dispatchGroup.enter()
+            
+            userRef.whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+                defer {
+                    dispatchGroup.leave()
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    completion(.success(users))
+                    return
+                }
+                
+                for document in documents {
+                    let userData = document.data()
+                    
+                    let name = userData["name"] as? String
+                    let password = userData["password"] as? String
+                    let phoneNumber = userData["phone"] as? String
+                    let role = userData["role"] as? String
+                    let photoUrl = userData["photoUrl"] as? String
+                    
+                    let user = User(name: name ?? "", emailAddress: email, password: password ?? "", phoneNumber: phoneNumber ?? "", role: role ?? "", photoUrl: photoUrl)
+                    users.append(user)
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(.success(users))
         }
     }
     
@@ -218,8 +260,11 @@ final class DatabaseManager{
             let pricePerSeat = tripData?["pricePerSeat"] as? Double
             let startDate = tripData?["startDate"] as? String
             let startTime = tripData?["startTime"] as? String
-
-            let trip = Trip(id: tripID, sourceName: sourceName!, destinationName: destinationName!, sourceLatitude: sourceLatitude!, sourceLongitude: sourceLongitude!, destinationLatitude: destinationLatitude!, destinationLongitude: destinationLongitude!, userEmail: userEmail!, numberOfSeats: numberOfSeats!, pricePerSeat: pricePerSeat!, startDate: startDate!, startTime: startTime!)
+            let passengers = tripData?["passengers"] as? [String]
+            let pendingRequests = tripData?["pendingRequests"] as? [String]
+            let rejectedRequests = tripData?["rejectedRequests"] as? [String]
+            
+            let trip = Trip(id: tripID, sourceName: sourceName!, destinationName: destinationName!, sourceLatitude: sourceLatitude!, sourceLongitude: sourceLongitude!, destinationLatitude: destinationLatitude!, destinationLongitude: destinationLongitude!, userEmail: userEmail!, numberOfSeats: numberOfSeats!, pricePerSeat: pricePerSeat!, startDate: startDate!, startTime: startTime!, passengers: passengers!, pendingRequests: pendingRequests!, rejectedRequests: rejectedRequests!)
             completion(.success(trip))
         }
     }

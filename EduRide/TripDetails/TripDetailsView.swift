@@ -10,14 +10,14 @@ import MapKit
 
 class TripDetailsView: UIView {
     
-    let databaseValues: [String] = ["Item 1", "Item 2", "Item 3"]
+    var databaseValues: [String] = []
     var coPassCardViews: [CardView] = []
     var labelDriver: UILabel!
     var labelCoPassengers: UILabel!
     var driverCardView = CardView()
     var mapView: MKMapView!
     var contentWrapper: UIScrollView!
-
+    var sourceDestLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,6 +26,7 @@ class TripDetailsView: UIView {
         setupContentWrapper()
         setupLabelDriver()
         setupLabelCoPassengers()
+        setupLabelSourceDest()
         setupDriverCardView()
         setupCoPassengerCardView()
         setupMapview()
@@ -63,6 +64,26 @@ class TripDetailsView: UIView {
         }
     }
     
+    func updateCoPassengerCardViews(completion: @escaping () -> Void) {
+        for cardView in coPassCardViews {
+            cardView.removeFromSuperview()
+        }
+        coPassCardViews.removeAll()
+        
+        setupCoPassengerCardView()
+        
+        initConstraints()
+        completion()
+    }
+    
+    func setupLabelSourceDest() {
+        sourceDestLabel = UILabel()
+        sourceDestLabel.text = "Source --> Destination"
+        sourceDestLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        sourceDestLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentWrapper.addSubview(sourceDestLabel)
+    }
+    
     func setupLabelDriver() {
         labelDriver = UILabel()
         labelDriver.text = "Driver"
@@ -98,7 +119,10 @@ class TripDetailsView: UIView {
             mapView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             mapView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
             
-            labelDriver.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 30),
+            sourceDestLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 16),
+            sourceDestLabel.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 16),
+            
+            labelDriver.topAnchor.constraint(equalTo: sourceDestLabel.bottomAnchor, constant: 30),
             labelDriver.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 16),
 
             driverCardView.topAnchor.constraint(equalTo: labelDriver.bottomAnchor, constant: 16),

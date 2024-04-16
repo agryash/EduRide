@@ -23,30 +23,39 @@ class TripDetailsViewController: UIViewController {
         self.title = "Trip Details"
         for (index, cardView) in tripDetails.coPassCardViews.enumerated() {
             cardView.acceptButton.tag = index
-            cardView.rejectButton.tag = index
             
             cardView.acceptButton.addTarget(self, action: #selector(acceptButtonTapped(_:)), for: .touchUpInside)
-            cardView.rejectButton.addTarget(self, action: #selector(rejectButtonTapped(_:)), for: .touchUpInside)
         }
+
         loadTrip()
-        setupMapView()
     }
     
     func loadTrip() {
-        
+        DatabaseManager.shared.getTripDetails(tripID: tripId!) { (result: Result<Trip?, Error>) in
+            switch result {
+            case .success(let trip):
+                if let trip = trip {
+                    self.setupMapView(sourceLatitude: trip.sourceLatitude, destinationLatitude: trip.destinationLatitude, sourceLongitude: trip.sourceLongitude, destinationLongitude: trip.destinationLongitude)
+                    self.tripDetails.driverCardView.mainDescriptionLabel.text = trip.userEmail
+                } else {
+                    print("Error: Trip not found")
+                }
+            case .failure(let error):
+                print("Error fetching trip details: \(error.localizedDescription)")
+            }
+        }
     }
     
-    func setupMapView() {
-        // TODO: Replace the source and destination coordinates based on the trip details
-        tripDetails.mapView.spanBetweenLocations(sourceLatitude: 42.3435867, destinationLatitude: 42.9325459, sourceLongitude: -71.0892265, destinationLongitude: -71.3340346)
+    func setupMapView(sourceLatitude: Double, destinationLatitude: Double, sourceLongitude: Double, destinationLongitude: Double) {
+        tripDetails.mapView.spanBetweenLocations(sourceLatitude: sourceLatitude, destinationLatitude: destinationLatitude, sourceLongitude: sourceLongitude, destinationLongitude: destinationLongitude)
         let source = Place(
             title: "Source",
-            coordinate: CLLocationCoordinate2D(latitude: 42.3435867, longitude: -71.0892265),
+            coordinate: CLLocationCoordinate2D(latitude: sourceLatitude, longitude: sourceLongitude),
             info: "Start"
         )
         let destination = Place(
             title: "Destination",
-            coordinate: CLLocationCoordinate2D(latitude: 42.9325459, longitude: -71.3340346),
+            coordinate: CLLocationCoordinate2D(latitude: destinationLatitude, longitude: destinationLongitude),
             info: "End"
         )
         tripDetails.mapView.addAnnotation(source)
@@ -59,14 +68,6 @@ class TripDetailsViewController: UIViewController {
         let title = cardView.mainDescriptionLabel.text
         
         print("Accept button tapped for co-passenger: \(title ?? "Unknown")")
-    }
-    
-    @objc func rejectButtonTapped(_ sender: UIButton) {
-        let index = sender.tag
-        let cardView = tripDetails.coPassCardViews[index]
-        let title = cardView.mainDescriptionLabel.text
-        
-        print("Reject button tapped for co-passenger: \(title ?? "Unknown")")
     }
 }
 

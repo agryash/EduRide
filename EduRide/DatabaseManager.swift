@@ -143,8 +143,6 @@ final class DatabaseManager{
             let uid = currentUser.uid
             let email = currentUser.email
             let displayName = currentUser.displayName
-            print(email!)
-            print(uid)
             let userRef = db.collection("users").whereField("email", isEqualTo: email!)
             
             userRef.addSnapshotListener { (documentSnapshot, error) in
@@ -165,6 +163,85 @@ final class DatabaseManager{
         }
     }
     
+    public func getUserDetailsFromEmails(for emailAddresses: [String], completion: @escaping (Result<[User], Error>) -> Void) {
+        let userRef = db.collection("users")
+        var users: [User] = []
+        
+        let dispatchGroup = DispatchGroup()
+        
+        for email in emailAddresses {
+            dispatchGroup.enter()
+            
+            userRef.whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+                defer {
+                    dispatchGroup.leave()
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    completion(.success(users))
+                    return
+                }
+                
+                for document in documents {
+                    let userData = document.data()
+                    
+                    let name = userData["name"] as? String
+                    let password = userData["password"] as? String
+                    let phoneNumber = userData["phone"] as? String
+                    let role = userData["role"] as? String
+                    let photoUrl = userData["photoUrl"] as? String
+                    
+                    let user = User(name: name ?? "", emailAddress: email, password: password ?? "", phoneNumber: phoneNumber ?? "", role: role ?? "", photoUrl: photoUrl)
+                    users.append(user)
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(.success(users))
+        }
+    }
+    
+    public func getTripDetails(tripID: String, completion: @escaping (Result<Trip?, Error>) -> Void) {
+        let tripRef = db.collection("trips").document(tripID)
+            
+        tripRef.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists else {
+                completion(.success(nil))
+                return
+            }
+            
+            let tripData = document.data()
+            let sourceName = tripData?["sourceName"] as? String
+            let destinationName = tripData?["destinationName"] as? String
+            let sourceLatitude = tripData?["sourceLatitude"] as? Double
+            let sourceLongitude = tripData?["sourceLongitude"] as? Double
+            let destinationLatitude = tripData?["destinationLatitude"] as? Double
+            let destinationLongitude = tripData?["destinationLongitude"] as? Double
+            let userEmail = tripData?["userEmail"] as? String
+            let numberOfSeats = tripData?["numberOfSeats"] as? Int
+            let pricePerSeat = tripData?["pricePerSeat"] as? Double
+            let startDate = tripData?["startDate"] as? String
+            let startTime = tripData?["startTime"] as? String
+            let passengers = tripData?["passengers"] as? [String]
+            let pendingRequests = tripData?["pendingRequests"] as? [String]
+            let rejectedRequests = tripData?["rejectedRequests"] as? [String]
+            
+            let trip = Trip(id: tripID, sourceName: sourceName!, destinationName: destinationName!, sourceLatitude: sourceLatitude!, sourceLongitude: sourceLongitude!, destinationLatitude: destinationLatitude!, destinationLongitude: destinationLongitude!, userEmail: userEmail!, numberOfSeats: numberOfSeats!, pricePerSeat: pricePerSeat!, startDate: startDate!, startTime: startTime!, passengers: passengers!, pendingRequests: pendingRequests!, rejectedRequests: rejectedRequests!)
+            completion(.success(trip))
+        }
+    }
+      
     public func getUserDetailsByEmail(with email:String, completion: @escaping (Result<User?, Error>) -> Void) {
         let userRef = db.collection("users").whereField("email", isEqualTo: email)
         userRef.addSnapshotListener { (documentSnapshot, error) in
@@ -305,6 +382,133 @@ final class DatabaseManager{
                 } else {
                     completion(.success(trips))
                 }
+        }
+    }
+    
+    func getAllConversationsWithUser(with email: String, completion: @escaping (Result<Set<String>, Error>) -> Void) {
+        var contacts = [""]
+        
+        self.db.collection("userchats")
+            .document(email)
+            .collection("chats")
+            .addSnapshotListener(includeMetadataChanges: false) { querySnapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                if let documents = querySnapshot?.documents {
+                    for document in documents {
+                        do {
+                            let chat = try document.data(as: Chat.self)
+                            contacts.append(chat.to)
+                            contacts.append(chat.from)
+                            print(contacts)
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    var myContacts = Set(contacts)
+                    myContacts.remove("")
+                    myContacts.remove(email)
+                    completion(.success(myContacts))
+                } else {
+                    completion(.success(Set(contacts)))
+                }
+            }
+    }
+    
+    public func insertChat(with user: String, sender: String, text: String){
+        
+        let currTimeStamp = Date().timeIntervalSince1970
+        let collectionContacts = db
+            .collection("userchats")
+            .document(sender)
+            .collection("chats")
+
+        do {
+            let chatData = Chat(from: sender, timestamp: currTimeStamp, text: text, to: user)
+            try collectionContacts.addDocument(from: chatData) { error in
+                if error == nil {
+                    print("Chat added")
+                } else {
+                    print("Error adding document: \(error!)")
+                }
+            }
+        } catch {
+            print("Error encoding chat data: \(error)")
+        }
+        
+        let collectionContacts2 = db
+            .collection("userchats")
+            .document(user)
+            .collection("chats")
+
+        do {
+            let chatData = Chat(from: sender, timestamp: currTimeStamp, text: text, to: user)
+            try collectionContacts2.addDocument(from: chatData) { error in
+                if error == nil {
+                    print("Chat added")
+                } else {
+                    print("Error adding document: \(error!)")
+                }
+            }
+        } catch {
+            print("Error encoding chat data: \(error)")
+        }
+    }
+    
+    public func findChat(with email: String, user: String, completion: @escaping (Result<[Chat], Error>) -> Void){
+        var messages: [Chat] = []
+        
+        self.db.collection("userchats")
+            .document(email)
+            .collection("chats")
+            .addSnapshotListener(includeMetadataChanges: false) { querySnapshot, error in
+                messages.removeAll()
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                if let documents = querySnapshot?.documents {
+                    for document in documents {
+                        do {
+                            let chat = try document.data(as: Chat.self)
+                            print(chat)
+                            if((chat.from == email && chat.to == user) || (chat.from == user && chat.to == email)){
+                                messages.append(Chat(from: chat.from, timestamp: chat.timestamp, text: chat.text, to: chat.to))
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    
+                    messages.sort(by: {$0.timestamp < $1.timestamp})
+                    
+                    completion(.success(messages))
+                } else {
+                    completion(.success(messages))
+                }
+            }
+    }
+    
+    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
+        db.collection("users").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            var users: [[String: String]] = []
+            
+            for document in querySnapshot!.documents {
+                let userData = document.data()
+                
+                users.append(userData as! [String: String])
+            }
+            
+            completion(.success(users))
         }
     }
 }

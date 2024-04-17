@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ChatViewController: UIViewController {
-    
+    var currUser : FirebaseAuth.User?
     var chats:[String] = []
     let chatScreen = ChatScreenView()
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var hashmap: [String: User] = [:]
     
     override func loadView() {
         view = chatScreen
@@ -19,18 +22,36 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Chats"
+        
+        handleAuth = Auth.auth().addStateDidChangeListener{auth, user in
+            if user != nil {
+                self.currUser = user
+                self.fetchConversations()
+            }
+        }
         // Do any additional setup after loading the view.
-        fetchConverstaions()
+        
         
         chatScreen.tableViewChats.dataSource = self
         chatScreen.tableViewChats.delegate = self
     }
 
-    func fetchConverstaions(){
+    func fetchConversations(){
         chatScreen.tableViewChats.isHidden = false;
-        chats = ["Yash", "Riya", "Gowtham", "Abhisha"]
+        
+        DatabaseManager.shared.getAllConversationsWithUser(with: (currUser?.email)!) { result in
+            switch result {
+            case .success(let conversationIDs):
+                let myArray: [String] = Array(conversationIDs)
+                
+                self.chats = myArray
+                self.chatScreen.tableViewChats.reloadData()
+                
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
     }
-
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource{
@@ -51,7 +72,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource{
         let vc = SingleChatViewController(with: "", id: "")
         vc.title = chats[indexPath.row]
         vc.otherUserEmail = chats[indexPath.row]
-        vc.currSender = ""
+        vc.currSender = (self.currUser?.email!)!
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -14,8 +14,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.tabBar.barTintColor = .lightGray
-        //self.tabBar.tintColor = .systemBlue
         self.tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         
         DatabaseManager.shared.getCurrentUserDetails { result in
@@ -35,6 +33,7 @@ class TabBarController: UITabBarController {
             let pending = self.createNav(with: "Requests", and: UIImage (systemName: "person.badge.plus"), vc: PendingRequestsViewController())
             let myTrips = self.createNav(with: "My Trips", and: UIImage(systemName: "arrow.triangle.branch"), vc: MyTripsViewController())
             let chat = self.createNav(with: "Chat", and: UIImage (systemName:"message"), vc: ChatViewController())
+            
             let profile = self.createNav(with: "Profile", and: UIImage (systemName:"person"), vc: ProfileViewController())
             
             self.setViewControllers([offer, pending, myTrips, chat, profile], animated:true)

@@ -16,6 +16,10 @@
 		708A52292BC5A857004DC3BF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 708A52282BC5A857004DC3BF /* FirebaseFirestoreSwift */; };
 		708A522B2BC5A857004DC3BF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 708A522A2BC5A857004DC3BF /* FirebaseStorage */; };
 		70CA84062BCAFFCB003A6AA7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CA84052BCAFFCB003A6AA7 /* User.swift */; };
+		762283CA2BCF28F00069B6CE /* PendingRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762283C92BCF28F00069B6CE /* PendingRequestsViewController.swift */; };
+		762283CC2BCF28FD0069B6CE /* SentRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762283CB2BCF28FD0069B6CE /* SentRequestsViewController.swift */; };
+		762283CE2BCF291A0069B6CE /* SentRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762283CD2BCF291A0069B6CE /* SentRequestsView.swift */; };
+		762283D02BCF29320069B6CE /* PendingRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762283CF2BCF29320069B6CE /* PendingRequestsView.swift */; };
 		767E71312BC0A5A800B96A7A /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71302BC0A5A800B96A7A /* RegisterView.swift */; };
 		767E71332BC0A5B800B96A7A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71322BC0A5B800B96A7A /* RegisterViewController.swift */; };
 		767E71362BC0A77200B96A7A /* MyTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767E71352BC0A77200B96A7A /* MyTripsViewController.swift */; };
@@ -91,6 +95,10 @@
 		382F27182BBC9BA400DB7315 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		382F271A2BBC9BB300DB7315 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		70CA84052BCAFFCB003A6AA7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		762283C92BCF28F00069B6CE /* PendingRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestsViewController.swift; sourceTree = "<group>"; };
+		762283CB2BCF28FD0069B6CE /* SentRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentRequestsViewController.swift; sourceTree = "<group>"; };
+		762283CD2BCF291A0069B6CE /* SentRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentRequestsView.swift; sourceTree = "<group>"; };
+		762283CF2BCF29320069B6CE /* PendingRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingRequestsView.swift; sourceTree = "<group>"; };
 		767E71302BC0A5A800B96A7A /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		767E71322BC0A5B800B96A7A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		767E71352BC0A77200B96A7A /* MyTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +210,29 @@
 			path = "Data Models";
 			sourceTree = "<group>";
 		};
+		762283D12BCF2A950069B6CE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				762283CB2BCF28FD0069B6CE /* SentRequestsViewController.swift */,
+				762283C92BCF28F00069B6CE /* PendingRequestsViewController.swift */,
+				767E71352BC0A77200B96A7A /* MyTripsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		762283D22BCF2AA30069B6CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				767E71372BC0A78700B96A7A /* MyTripsView.swift */,
+				762283CF2BCF29320069B6CE /* PendingRequestsView.swift */,
+				762283CD2BCF291A0069B6CE /* SentRequestsView.swift */,
+				38281F092BCCC952008F5E0B /* UpcomingTripsCardView.swift */,
+				767E713D2BC0A7D200B96A7A /* SentRequestCardView.swift */,
+				767E713B2BC0A7C500B96A7A /* PendingRequestCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		767E712F2BC0A59100B96A7A /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,11 +245,8 @@
 		767E71342BC0A74C00B96A7A /* MyTrips */ = {
 			isa = PBXGroup;
 			children = (
-				767E71352BC0A77200B96A7A /* MyTripsViewController.swift */,
-				767E71372BC0A78700B96A7A /* MyTripsView.swift */,
-				767E713B2BC0A7C500B96A7A /* PendingRequestCardView.swift */,
-				767E713D2BC0A7D200B96A7A /* SentRequestCardView.swift */,
-				38281F092BCCC952008F5E0B /* UpcomingTripsCardView.swift */,
+				762283D22BCF2AA30069B6CE /* View */,
+				762283D12BCF2A950069B6CE /* Controller */,
 			);
 			path = MyTrips;
 			sourceTree = "<group>";
@@ -526,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				762283D02BCF29320069B6CE /* PendingRequestsView.swift in Sources */,
 				767E71502BC0A96600B96A7A /* Trip.swift in Sources */,
 				767E71312BC0A5A800B96A7A /* RegisterView.swift in Sources */,
 				70CA84062BCAFFCB003A6AA7 /* User.swift in Sources */,
@@ -544,8 +573,10 @@
 				767E71692BC0AB6D00B96A7A /* EditProfileViewController.swift in Sources */,
 				767E71462BC0A8D100B96A7A /* TripCardView.swift in Sources */,
 				767E716B2BC0AB8000B96A7A /* ProfileView.swift in Sources */,
+				762283CE2BCF291A0069B6CE /* SentRequestsView.swift in Sources */,
 				76CBA4C02BC8B18600DCC245 /* DatabaseManager.swift in Sources */,
 				FCB8C4D12BC4CA73007FE672 /* Chat.swift in Sources */,
+				762283CC2BCF28FD0069B6CE /* SentRequestsViewController.swift in Sources */,
 				767E713C2BC0A7C500B96A7A /* PendingRequestCardView.swift in Sources */,
 				767E71642BC0AAD400B96A7A /* SearchTableViewManager.swift in Sources */,
 				767E715E2BC0AA8E00B96A7A /* LoadPlaces.swift in Sources */,
@@ -567,6 +598,7 @@
 				767E71622BC0AABE00B96A7A /* MapAnnotationDelegate.swift in Sources */,
 				767E713E2BC0A7D200B96A7A /* SentRequestCardView.swift in Sources */,
 				767E71562BC0A9D200B96A7A /* SearchTableViewCell.swift in Sources */,
+				762283CA2BCF28F00069B6CE /* PendingRequestsViewController.swift in Sources */,
 				FC6EB9632BBB8A49002327C2 /* HomeViewController.swift in Sources */,
 				FC840C322B92B72200EC7B38 /* SceneDelegate.swift in Sources */,
 				767E71442BC0A8B900B96A7A /* FindTripViewController.swift in Sources */,

@@ -46,27 +46,12 @@ class FindTripViewController: UIViewController {
         DatabaseManager.shared.findTripsBy(with: date, completion: { [weak self] result in
             switch result {
             case .success(let trips):
-                
                 self?.trips = trips
                 self?.cardViewReload()
             case .failure(let error):
                 print("Failed to get users: \(error)")
             }
         })
-        
-        DatabaseManager.shared.findTripsForUser(with: "adriver@gmail.com") { [weak self]  result in
-            switch result {
-            case .success(let passengers):
-                self?.passengers = passengers
-
-                for passenger in passengers {
-                    print("###Requester is \(passenger):")
-                }
-            case .failure(let error):
-                print("Error occurred:", error)
-            }
-        }
-                                    
     }
     
     func cardViewReload() {

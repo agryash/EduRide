@@ -88,33 +88,6 @@ final class DatabaseManager{
             }
         }
     }
-    
-    public func findRequestForTripId(with tripId: String, completion: @escaping (Result<Array<Request>, Error>) -> Void) {
-        var requests = [Request]()
-        
-        self.db.collection("requests")
-            .addSnapshotListener(includeMetadataChanges: false) { querySnapshot, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                if let documents = querySnapshot?.documents {
-                    for document in documents {
-                        do {
-                            let request = try document.data(as: Request.self)
-                            if request.tripId == tripId {
-                                requests.append(request)
-                            }
-                        } catch {
-                            print(error)
-                        }
-                    }
-                    completion(.success(requests))
-                } else {
-                    completion(.success(requests))
-                }
-            }
-    }
 
     public func insertUser(with user: User) {
         do {
@@ -377,7 +350,39 @@ final class DatabaseManager{
                 } else {
                     completion(.success(trips))
                 }
-            }
+        }
+    }
+    
+    public func findSentRequestsForPassenger(with user: String, completion: @escaping (Result<Array<Trip>, Error>) -> Void) {
+        var trips = [Trip]()
+        
+        self.db.collection("trips")
+            .addSnapshotListener(includeMetadataChanges: false) { querySnapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                if let documents = querySnapshot?.documents {
+                    trips.removeAll()
+                    for document in documents {
+                        do {
+                            let trip = try document.data(as: Trip.self)
+                            trip.id = document.documentID
+                            if trip.pendingRequests.contains(user) && trip.startDate >= self.today {
+                                trips.append(trip)
+                            }
+                            
+                        } catch {
+                            print(error)
+                        }
+                    }
+
+                    completion(.success(trips))
+                } else {
+                    completion(.success(trips))
+                }
+        }
     }
     
     func getAllConversationsWithUser(with email: String, completion: @escaping (Result<Set<String>, Error>) -> Void) {

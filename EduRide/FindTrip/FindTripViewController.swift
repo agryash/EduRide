@@ -46,7 +46,6 @@ class FindTripViewController: UIViewController {
         DatabaseManager.shared.findTripsBy(with: date, completion: { [weak self] result in
             switch result {
             case .success(let trips):
-                
                 self?.trips = trips
                 self?.cardViewReload()
             case .failure(let error):

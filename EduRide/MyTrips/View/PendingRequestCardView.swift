@@ -15,9 +15,7 @@ class PendingRequestCardView: UIView {
     
     var acceptButton: UIButton!
     var rejectButton: UIButton!
-    
     var chatButton: UIButton!  // Adding the chat button
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -89,8 +89,12 @@ class MyTripsViewController: UIViewController {
         
         if let tripId = trip.id {
             let tripDetailsViewController = TripDetailsViewController()
-            tripDetailsViewController.tripId = trip.id
-            navigationController?.pushViewController(tripDetailsViewController, animated: true)
+            if let email = currentUser?.emailAddress {
+                tripDetailsViewController.tripId = trip.id
+                tripDetailsViewController.currUser = (currentUser?.emailAddress)!
+                navigationController?.pushViewController(tripDetailsViewController, animated: true)
+            }
+            
         }
     }
     

@@ -24,6 +24,7 @@ class TripDetailsViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Trip Details"
         loadTrip()
+        
     }
     
     func addButtonAction() {
@@ -149,10 +150,12 @@ class TripDetailsViewController: UIViewController {
     }
     
     @objc func acceptButtonTappedForDriver(_ sender: UIButton) {
+        
         //let index = sender.tag
         let title = self.tripDetails.driverCardView.mainDescriptionLabel.text
         //TODO: call message view controller with title
-        
+        print(title)
+        print(currUser)
         if(title == currUser){
             self.showToast(message: "Can't Chat with Yourself", font: .systemFont(ofSize: 12.0))
         } else{

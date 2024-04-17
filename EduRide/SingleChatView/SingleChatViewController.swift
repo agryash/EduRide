@@ -31,6 +31,7 @@ class SingleChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("SingleChatViewController: " + currSender)
         fetchMessages()
         
         chatScreen.tableViewChats.dataSource = self
@@ -44,6 +45,7 @@ class SingleChatViewController: UIViewController {
             showInvalidErrorAlert(message: "Message can't be empty")
         } else {
             //Send Chat
+            DatabaseManager.shared.insertChat(with: otherUserEmail, sender: currSender , text: chatScreen.textFieldAddNote.text!)
             chatScreen.textFieldAddNote.text = ""
             fetchMessages()
             chatScreen.tableViewChats.reloadData()
@@ -67,7 +69,18 @@ class SingleChatViewController: UIViewController {
     }
     
     func fetchMessages(){
-        messages = [Chat(from: "From", timestamp: 0, text: "Hello", to: "You")]
+        DatabaseManager.shared.findChat(with: currSender, user: otherUserEmail, completion: { result in
+            switch result {
+            case .success(let conversationIDs):
+                self.messages.removeAll()
+                let messagesArray: [Chat] = Array(conversationIDs)
+                self.messages = messagesArray
+                self.chatScreen.tableViewChats.reloadData()
+                
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        })
         
     }
     

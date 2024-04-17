@@ -13,6 +13,7 @@ class TripDetailsViewController: UIViewController {
     let tripDetails = TripDetailsView()
     var tripId: String?
     var trip = [Trip]()
+    var currUser = ""
     var emailAddresses: [String] = []
     
     override func loadView() {
@@ -33,12 +34,13 @@ class TripDetailsViewController: UIViewController {
     }
     
     func loadTrip() {
-        DatabaseManager.shared.getTripDetails(tripID: tripId!) { (result: Result<Trip?, Error>) in
+        DatabaseManager.shared.getTripDetails(tripID: tripId!) { [self] (result: Result<Trip?, Error>) in
             switch result {
             case .success(let trip):
                 if let trip = trip {
                     self.setupMapView(sourceLatitude: trip.sourceLatitude, destinationLatitude: trip.destinationLatitude, sourceLongitude: trip.sourceLongitude, destinationLongitude: trip.destinationLongitude)
                     self.tripDetails.sourceDestLabel.text = trip.sourceName + " --> " + trip.destinationName
+                    //self.setupDisplayValues()
                     self.tripDetails.databaseValues = trip.passengers
                     self.tripDetails.driverCardView.mainDescriptionLabel.text = trip.userEmail
                     self.emailAddresses.append(trip.userEmail)
@@ -132,14 +134,53 @@ class TripDetailsViewController: UIViewController {
         let cardView = tripDetails.coPassCardViews[index]
         let title = cardView.mainDescriptionLabel.text
         //TODO: call message view controller with title
-        print("Accept button tapped for co-passenger: \(title ?? "Unknown")")
+        
+        if(title == currUser){
+            self.showToast(message: "Can't Chat with Yourself", font: .systemFont(ofSize: 12.0))
+        } else{
+            let vc = SingleChatViewController(with: "", id: "")
+            vc.title = title
+            vc.otherUserEmail = title!
+            vc.currSender = currUser
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        //print("Accept button tapped for co-passenger: \(title ?? "Unknown")")
     }
     
     @objc func acceptButtonTappedForDriver(_ sender: UIButton) {
-        let index = sender.tag
+        //let index = sender.tag
         let title = self.tripDetails.driverCardView.mainDescriptionLabel.text
         //TODO: call message view controller with title
-        print("Accept button tapped for driver: \(title ?? "Unknown")")
+        
+        if(title == currUser){
+            self.showToast(message: "Can't Chat with Yourself", font: .systemFont(ofSize: 12.0))
+        } else{
+            let vc = SingleChatViewController(with: "", id: "")
+            vc.title = title
+            vc.otherUserEmail = title!
+            vc.currSender = currUser
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func showToast(message : String, font: UIFont) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-200, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
 

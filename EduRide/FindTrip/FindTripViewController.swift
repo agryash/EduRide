@@ -85,6 +85,7 @@ class FindTripViewController: UIViewController {
         
         let tripDetailsViewController = TripDetailsViewController()
         tripDetailsViewController.tripId = trip.id
+        tripDetailsViewController.currUser = currEmail
         navigationController?.pushViewController(tripDetailsViewController, animated: true)
     }
     

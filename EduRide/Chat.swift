@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Chat{
+struct Chat: Codable{
     var from: String
     var timestamp: Double
     var text: String
